@@ -171,16 +171,17 @@ export default function Quote() {
                                     </div>
                                     {s < 4 && (
                                         <div
-                                            className={`h-1 w-16 sm:w-24 lg:w-32 mx-2 transition-all duration-300 ${step > s ? 'bg-primary' : 'bg-secondary'
+                                            className={`h-1 w-6 sm:w-16 md:w-24 lg:w-32 mx-1 sm:mx-2 transition-all duration-300 ${step > s ? 'bg-primary' : 'bg-secondary'
                                                 }`}
                                         />
                                     )}
                                 </div>
                             ))}
                         </div>
-                        <div className="flex justify-between text-sm text-muted-foreground">
+                        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground px-1">
                             <span>Project Type</span>
-                            <span>Your Info</span>
+                            <span className="hidden sm:inline">Your Info</span>
+                            <span className="sm:hidden">Info</span>
                             <span>Budget</span>
                             <span>Details</span>
                         </div>
@@ -196,13 +197,13 @@ export default function Quote() {
                                 className="space-y-6"
                             >
                                 <h2 className="heading-md mb-8">What type of project do you need?</h2>
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                     {projectTypes.map((type) => (
                                         <button
                                             key={type.id}
                                             type="button"
                                             onClick={() => setFormData({ ...formData, projectType: type.id })}
-                                            className={`p-6 rounded-2xl border-2 transition-all duration-300 ${formData.projectType === type.id
+                                            className={`p-4 sm:p-6 rounded-2xl border-2 transition-all duration-300 ${formData.projectType === type.id
                                                 ? 'border-primary bg-primary/10'
                                                 : 'border-border hover:border-primary/50'
                                                 }`}
@@ -304,13 +305,13 @@ export default function Quote() {
                                     <label className="block font-medium mb-4">
                                         What's your estimated budget? *
                                     </label>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                         {budgetRanges.map((range) => (
                                             <button
                                                 key={range}
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, budget: range })}
-                                                className={`px-4 py-3 rounded-lg border-2 transition-all duration-300 ${formData.budget === range
+                                                className={`px-3 py-3 rounded-lg border-2 transition-all duration-300 text-sm ${formData.budget === range
                                                     ? 'border-primary bg-primary/10'
                                                     : 'border-border hover:border-primary/50'
                                                     }`}
@@ -324,7 +325,7 @@ export default function Quote() {
                                     <label className="block font-medium mb-4">
                                         What's your expected timeline? *
                                     </label>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                         {timelines.map((time) => (
                                             <button
                                                 key={time}
