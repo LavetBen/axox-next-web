@@ -28,11 +28,15 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-secondary overflow-hidden">
+    <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-foreground rounded-full blur-3xl" />
+      <div className="absolute inset-0 z-0">
+        {/* Grid Pattern with many lines */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.6]" />
+
+        {/* Gradient Overlay for fade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+
       </div>
 
       <div className="section-container relative z-10 pt-32 md:pt-16">

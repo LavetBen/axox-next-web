@@ -1,4 +1,5 @@
 import { KnowledgeBaseSection } from '@/components/home/KnowledgeBaseSection';
+import { PackageShowcase } from '@/components/knowledge-base/PackageShowcase';
 
 export const metadata = {
     title: 'Knowledge Base - AXOX Digital',
@@ -9,6 +10,7 @@ export default function KnowledgeBasePage() {
     return (
         <div className="pt-20">
             <KnowledgeBaseSection />
+            <PackageShowcase />
         </div>
     );
 }
