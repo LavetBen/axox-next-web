@@ -26,18 +26,15 @@ export const DomainHostingSection = () => {
         setIsSearching(true);
         setSearchResult(null);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Simulate short delay for UX
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         setIsSearching(false);
-        setSearchResult({
-            available: true,
-            domain: domainQuery
-        });
 
         toast({
-            title: "Service Coming Soon",
-            description: "Domain registration will be available shortly!",
+            title: "Service Currently Unavailable",
+            description: "Domain search is currently under maintenance. Please try again later.",
+            variant: "destructive",
             duration: 3000,
         });
     };
@@ -52,12 +49,13 @@ export const DomainHostingSection = () => {
     };
 
     const tlds = [
+        { name: '.co.zw', price: '$1.99', original: '$3.00' },
         { name: '.com', price: '$9.98', original: '$13.98' },
         { name: '.net', price: '$11.98', original: '$15.98' },
         { name: '.org', price: '$8.98', original: '$12.98' },
         { name: '.io', price: '$32.98', original: '$45.98' },
         { name: '.co', price: '$6.98', original: '$22.98' },
-        { name: '.ai', price: '$65.98', original: '$85.98' },
+        
     ];
 
     const hostingPlans = [
