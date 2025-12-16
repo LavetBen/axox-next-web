@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark, faCode, faChevronDown, faRocket, faServer, faLaptopCode, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark, faCode, faChevronDown, faRocket, faServer, faLaptopCode, faCloud, faLightbulb, faLayerGroup, faMobileScreen, faNetworkWired, faBriefcase, faTags, faBookOpen, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -13,17 +13,17 @@ const navLinks = [
     name: 'Innovation Hub',
     path: '/',
     description: 'Explore our latest digital innovations and core philosophy.',
-    icon: faRocket
+    icon: faLightbulb
   },
   {
     name: 'Capabilities',
     path: '/services',
     description: 'Discover our comprehensive suite of technical services.',
-    icon: faServer,
+    icon: faLayerGroup,
     subItems: [
-      { name: 'Mobile Applications', icon: faRocket },
-      { name: 'API Development', icon: faServer },
-      { name: 'Web Development', icon: faLaptopCode },
+      { name: 'Mobile Applications', icon: faMobileScreen },
+      { name: 'API Development', icon: faNetworkWired },
+      { name: 'Web Development', icon: faCode },
       { name: 'Cloud Solutions', icon: faCloud },
     ]
   },
@@ -31,25 +31,25 @@ const navLinks = [
     name: 'Showcase',
     path: '/portfolio',
     description: 'View our successful projects and client success stories.',
-    icon: faLaptopCode
+    icon: faBriefcase
   },
   {
     name: 'Pricing',
     path: '/pricing',
     description: 'Transparent pricing for our services.',
-    icon: faLaptopCode // Re-using icon, acceptable
+    icon: faTags
   },
   {
     name: 'Knowledge Base',
     path: '/knowledge-base',
     description: 'Guides and tutorials for your hosting.',
-    icon: faCloud
+    icon: faBookOpen
   },
   {
     name: 'Connect',
     path: '/contact',
     description: 'Get in touch with us to start your next project.',
-    icon: faCloud
+    icon: faEnvelope
   },
 ];
 
@@ -91,11 +91,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Image 
-              src="/logo.png" 
-              alt="Axox Logo" 
-              width={150} 
-              height={40} 
+            <Image
+              src="/logo.png"
+              alt="Axox Logo"
+              width={150}
+              height={40}
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>

@@ -50,7 +50,7 @@ export const ProjectsSection = () => {
           subtitle="Take a look at some of the innovative solutions we've delivered for our clients."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.filter(project => project.link).map((project, index) => (
             <motion.a
               key={project.id}
               href={project.link || '#'}

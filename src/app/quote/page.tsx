@@ -16,6 +16,9 @@ import {
     faUpload
 } from '@fortawesome/free-solid-svg-icons';
 import { useToast } from '@/hooks/use-toast';
+import { db, storage } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const projectTypes = [
     { id: 'website', label: 'Website', icon: faGlobe },
@@ -75,26 +78,59 @@ export default function Quote() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            let fileUrl = null;
 
-        toast({
-            title: "Quote Request Submitted!",
-            description: "We'll review your project and get back to you within 24 hours.",
-        });
+            // Upload file if exists
+            if (formData.file) {
+                const fileRef = ref(storage, `quotes/${Date.now()}_${formData.file.name}`);
+                const snapshot = await uploadBytes(fileRef, formData.file);
+                fileUrl = await getDownloadURL(snapshot.ref);
+            }
 
-        setFormData({
-            projectType: '',
-            name: '',
-            email: '',
-            phone: '',
-            company: '',
-            budget: '',
-            timeline: '',
-            description: '',
-            file: null,
-        });
-        setStep(1);
-        setIsSubmitting(false);
+            // Save to Firestore
+            await addDoc(collection(db, 'quotes'), {
+                projectType: formData.projectType,
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                company: formData.company,
+                budget: formData.budget,
+                timeline: formData.timeline,
+                description: formData.description,
+                fileUrl: fileUrl,
+                status: 'new',
+                createdAt: serverTimestamp(),
+            });
+
+            toast({
+                title: "Quote Request Submitted!",
+                description: "We'll review your project and get back to you within 24 hours.",
+            });
+
+            // Reset form
+            setFormData({
+                projectType: '',
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                budget: '',
+                timeline: '',
+                description: '',
+                file: null,
+            });
+            setStep(1);
+        } catch (error) {
+            console.error('Error submitting quote:', error);
+            toast({
+                title: "Submission Failed",
+                description: "There was an error submitting your request. Please try again.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const isStepValid = () => {
@@ -142,8 +178,8 @@ export default function Quote() {
                                 <div key={s} className="flex items-center">
                                     <div
                                         className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all duration-300 ${step >= s
-                                                ? 'bg-primary text-primary-foreground'
-                                                : 'bg-secondary text-muted-foreground'
+                                            ? 'bg-primary text-primary-foreground'
+                                            : 'bg-secondary text-muted-foreground'
                                             }`}
                                     >
                                         {step > s ? <FontAwesomeIcon icon={faCheck} className="w-4 h-4" /> : s}
@@ -182,8 +218,8 @@ export default function Quote() {
                                             type="button"
                                             onClick={() => setFormData({ ...formData, projectType: type.id })}
                                             className={`p-6 rounded-2xl border-2 transition-all duration-300 ${formData.projectType === type.id
-                                                    ? 'border-primary bg-primary/10'
-                                                    : 'border-border hover:border-primary/50'
+                                                ? 'border-primary bg-primary/10'
+                                                : 'border-border hover:border-primary/50'
                                                 }`}
                                         >
                                             <FontAwesomeIcon
@@ -290,8 +326,8 @@ export default function Quote() {
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, budget: range })}
                                                 className={`px-4 py-3 rounded-lg border-2 transition-all duration-300 ${formData.budget === range
-                                                        ? 'border-primary bg-primary/10'
-                                                        : 'border-border hover:border-primary/50'
+                                                    ? 'border-primary bg-primary/10'
+                                                    : 'border-border hover:border-primary/50'
                                                     }`}
                                             >
                                                 {range}
@@ -310,8 +346,8 @@ export default function Quote() {
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, timeline: time })}
                                                 className={`px-4 py-3 rounded-lg border-2 transition-all duration-300 ${formData.timeline === time
-                                                        ? 'border-primary bg-primary/10'
-                                                        : 'border-border hover:border-primary/50'
+                                                    ? 'border-primary bg-primary/10'
+                                                    : 'border-border hover:border-primary/50'
                                                     }`}
                                             >
                                                 {time}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faSearch,
@@ -12,9 +12,44 @@ import {
     faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 
 export const DomainHostingSection = () => {
+    const { toast } = useToast();
     const [domainQuery, setDomainQuery] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchResult, setSearchResult] = useState<{ available: boolean; domain: string } | null>(null);
+
+    const handleSearch = async () => {
+        if (!domainQuery) return;
+
+        setIsSearching(true);
+        setSearchResult(null);
+
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        setIsSearching(false);
+        setSearchResult({
+            available: true,
+            domain: domainQuery
+        });
+
+        toast({
+            title: "Service Coming Soon",
+            description: "Domain registration will be available shortly!",
+            duration: 3000,
+        });
+    };
+
+    const handleHostingClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        toast({
+            title: "Coming Soon!",
+            description: "Our premium hosting services are launching very shortly. Stay tuned!",
+            duration: 3000,
+        });
+    };
 
     const tlds = [
         { name: '.com', price: '$9.98', original: '$13.98' },
@@ -83,17 +118,56 @@ export const DomainHostingSection = () => {
 
                         {/* Search Bar */}
                         <div className="relative max-w-2xl mx-auto mb-10">
-                            <input
-                                type="text"
-                                placeholder="Find your new domain name..."
-                                value={domainQuery}
-                                onChange={(e) => setDomainQuery(e.target.value)}
-                                className="w-full h-16 pl-6 pr-36 rounded-full border-2 border-border bg-card text-foreground focus:border-primary focus:outline-none text-lg shadow-lg transition-colors"
-                            />
-                            <button className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 rounded-full font-bold transition-colors flex items-center gap-2">
-                                <FontAwesomeIcon icon={faSearch} />
-                                Search
-                            </button>
+                            <form
+                                onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
+                                className="relative"
+                            >
+                                <input
+                                    type="text"
+                                    placeholder="Find your new domain name..."
+                                    value={domainQuery}
+                                    onChange={(e) => setDomainQuery(e.target.value)}
+                                    className="w-full h-14 md:h-16 pl-6 pr-14 md:pr-36 rounded-full border-2 border-border bg-card text-foreground focus:border-primary focus:outline-none text-base md:text-lg shadow-lg transition-colors"
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={isSearching}
+                                    className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-8 rounded-full font-bold transition-all flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {isSearching ? (
+                                        <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                    ) : (
+                                        <>
+                                            <FontAwesomeIcon icon={faSearch} />
+                                            <span className="hidden md:inline">Search</span>
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+
+                            {/* Search Result */}
+                            <AnimatePresence>
+                                {searchResult && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        className="absolute top-full left-0 right-0 mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 flex items-center justify-between backdrop-blur-sm"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                                                <FontAwesomeIcon icon={faCheck} className="w-4 h-4" />
+                                            </div>
+                                            <div className="text-left">
+                                                <span className="font-bold">{searchResult.domain}</span> is available!
+                                            </div>
+                                        </div>
+                                        <button className="text-sm font-bold underline hover:no-underline">
+                                            Add to Cart
+                                        </button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
 
                         {/* TLD Grid */}
@@ -183,8 +257,8 @@ export const DomainHostingSection = () => {
                                     ))}
                                 </ul>
 
-                                <Link
-                                    href="/pricing"
+                                <button
+                                    onClick={handleHostingClick}
                                     className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-opacity hover:opacity-90 ${plan.popular
                                         ? 'bg-primary-foreground text-primary'
                                         : 'bg-primary text-primary-foreground'
@@ -192,7 +266,7 @@ export const DomainHostingSection = () => {
                                 >
                                     Get Started
                                     <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
-                                </Link>
+                                </button>
                             </motion.div>
                         ))}
                     </div>
