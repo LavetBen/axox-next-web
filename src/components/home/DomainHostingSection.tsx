@@ -152,19 +152,28 @@ export const DomainHostingSection = () => {
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
-                                        className="absolute top-full left-0 right-0 mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 flex items-center justify-between backdrop-blur-sm"
+                                        className="absolute top-full left-0 right-0 mt-4"
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
-                                                <FontAwesomeIcon icon={faCheck} className="w-4 h-4" />
-                                            </div>
+                                        <div className="bg-card border border-border rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-bottom-4">
                                             <div className="text-left">
-                                                <span className="font-bold">{searchResult.domain}</span> is available!
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <div className="w-6 h-6 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center">
+                                                        <FontAwesomeIcon icon={faCheck} className="w-3 h-3" />
+                                                    </div>
+                                                    <h3 className="font-bold text-lg">{searchResult.domain} is available!</h3>
+                                                </div>
+                                                <p className="text-muted-foreground text-sm">Get it now before someone else does.</p>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <span className="text-xl font-bold">$9.98<span className="text-sm font-normal text-muted-foreground">/yr</span></span>
+                                                <button
+                                                    onClick={handleHostingClick}
+                                                    className="btn-primary"
+                                                >
+                                                    Add to Cart
+                                                </button>
                                             </div>
                                         </div>
-                                        <button className="text-sm font-bold underline hover:no-underline">
-                                            Add to Cart
-                                        </button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>

@@ -12,13 +12,11 @@ import {
     faCloud,
     faPlug,
     faCode,
-    faCheck,
-    faUpload
+    faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import { useToast } from '@/hooks/use-toast';
-import { db, storage } from '@/lib/firebase';
+import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const projectTypes = [
     { id: 'website', label: 'Website', icon: faGlobe },
@@ -56,8 +54,8 @@ export default function Quote() {
         company: '',
         budget: '',
         timeline: '',
+
         description: '',
-        file: null as File | null,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -65,11 +63,7 @@ export default function Quote() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setFormData({ ...formData, file: e.target.files[0] });
-        }
-    };
+
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
@@ -79,14 +73,6 @@ export default function Quote() {
         setIsSubmitting(true);
 
         try {
-            let fileUrl = null;
-
-            // Upload file if exists
-            if (formData.file) {
-                const fileRef = ref(storage, `quotes/${Date.now()}_${formData.file.name}`);
-                const snapshot = await uploadBytes(fileRef, formData.file);
-                fileUrl = await getDownloadURL(snapshot.ref);
-            }
 
             // Save to Firestore
             await addDoc(collection(db, 'quotes'), {
@@ -97,8 +83,8 @@ export default function Quote() {
                 company: formData.company,
                 budget: formData.budget,
                 timeline: formData.timeline,
+
                 description: formData.description,
-                fileUrl: fileUrl,
                 status: 'new',
                 createdAt: serverTimestamp(),
             });
@@ -118,7 +104,6 @@ export default function Quote() {
                 budget: '',
                 timeline: '',
                 description: '',
-                file: null,
             });
             setStep(1);
         } catch (error) {
@@ -380,29 +365,7 @@ export default function Quote() {
                                         rows={6}
                                         className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                                         placeholder="Tell us about your project requirements, goals, and any specific features you need..."
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block font-medium mb-2">
-                                        Upload Files (optional)
-                                    </label>
-                                    <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">
-                                        <input
-                                            type="file"
-                                            id="file"
-                                            onChange={handleFileChange}
-                                            className="hidden"
-                                        />
-                                        <label htmlFor="file" className="cursor-pointer">
-                                            <FontAwesomeIcon icon={faUpload} className="w-8 h-8 text-muted-foreground mb-3" />
-                                            <p className="text-muted-foreground">
-                                                {formData.file ? formData.file.name : 'Click to upload or drag and drop'}
-                                            </p>
-                                            <p className="text-sm text-muted-foreground mt-1">
-                                                PDF, DOC, PNG, JPG up to 10MB
-                                            </p>
-                                        </label>
-                                    </div>
+                                    ></textarea>
                                 </div>
                             </motion.div>
                         )}
@@ -445,7 +408,7 @@ export default function Quote() {
                         </div>
                     </form>
                 </div>
-            </section>
+            </section >
         </>
     );
 }
