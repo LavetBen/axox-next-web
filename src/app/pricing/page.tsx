@@ -68,7 +68,7 @@ export default function Pricing() {
                         {/* Category Selector Skeleton */}
                         <div className="flex justify-start md:justify-center gap-4 mb-16 pb-4 md:pb-0">
                             {[1, 2, 3].map((i) => (
-                                <Skeleton key={i} className="h-14 w-40 rounded-none" />
+                                <Skeleton key={i} className="h-14 w-40 rounded-full" />
                             ))}
                         </div>
 
@@ -108,7 +108,7 @@ export default function Pricing() {
                                 <button
                                     key={category.id}
                                     onClick={() => setSelectedCategory(category.id)}
-                                    className={`flex-shrink-0 px-6 py-3 rounded-none font-medium transition-all duration-300 whitespace-nowrap ${selectedCategory === category.id
+                                    className={`flex-shrink-0 px-6 py-3 rounded-full font-medium transition-all duration-300 whitespace-nowrap ${selectedCategory === category.id
                                         ? 'bg-primary text-primary-foreground shadow-lg scale-105'
                                         : 'bg-secondary text-foreground hover:bg-secondary/80'
                                         }`}

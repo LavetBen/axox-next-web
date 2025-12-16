@@ -114,7 +114,7 @@ export default function Portfolio() {
                             <button
                                 key={category.name}
                                 onClick={() => setSelectedCategory(category.name)}
-                                className={`flex-shrink-0 px-6 py-2 rounded-none font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedCategory === category.name
+                                className={`flex-shrink-0 px-6 py-2 rounded-full font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedCategory === category.name
                                     ? 'bg-primary text-primary-foreground shadow-lg'
                                     : 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
                                     }`}
