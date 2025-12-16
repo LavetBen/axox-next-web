@@ -1,0 +1,204 @@
+"use client";
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faSearch,
+    faServer,
+    faGlobe,
+    faRocket,
+    faCheck,
+    faArrowRight
+} from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+
+export const DomainHostingSection = () => {
+    const [domainQuery, setDomainQuery] = useState('');
+
+    const tlds = [
+        { name: '.com', price: '$9.98', original: '$13.98' },
+        { name: '.net', price: '$11.98', original: '$15.98' },
+        { name: '.org', price: '$8.98', original: '$12.98' },
+        { name: '.io', price: '$32.98', original: '$45.98' },
+        { name: '.co', price: '$6.98', original: '$22.98' },
+        { name: '.ai', price: '$65.98', original: '$85.98' },
+    ];
+
+    const hostingPlans = [
+        {
+            icon: faGlobe,
+            title: 'Shared Hosting',
+            description: 'Easy, affordable web hosting to get you started.',
+            price: '$1.98',
+            period: '/mo',
+            features: ['Free Domain Name', 'Website Builder', 'cPanel Control Panel', 'Unmetered Bandwidth'],
+            popular: false,
+        },
+        {
+            icon: faRocket,
+            title: 'WordPress Hosting',
+            description: 'Managed hosting built specifically for WordPress speed.',
+            price: '$4.98',
+            period: '/mo',
+            features: ['2x Faster Speed', 'Free SSL Certificate', 'Daily Backups', 'Free Migration'],
+            popular: true,
+        },
+        {
+            icon: faServer,
+            title: 'VPS Hosting',
+            description: 'Total control and flexibility for your growing business.',
+            price: '$9.98',
+            period: '/mo',
+            features: ['Full Root Access', 'Dedicated IP', 'SSD Storage', 'Scalable Resources'],
+            popular: false,
+        },
+    ];
+
+    return (
+        <section className="section-padding bg-background relative overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
+
+            <div className="section-container relative z-10">
+
+                {/* Domain Search Section */}
+                <div className="text-center max-w-4xl mx-auto mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary/10 text-primary font-medium text-sm">
+                            Domain Names
+                        </span>
+                        <h2 className="heading-lg mb-6">
+                            Get Your Perfect <span className="text-primary">Domain Name</span>
+                        </h2>
+                        <p className="text-body text-lg mb-10">
+                            Search for your dream domain now. It's the first step to building your brand.
+                        </p>
+
+                        {/* Search Bar */}
+                        <div className="relative max-w-2xl mx-auto mb-10">
+                            <input
+                                type="text"
+                                placeholder="Find your new domain name..."
+                                value={domainQuery}
+                                onChange={(e) => setDomainQuery(e.target.value)}
+                                className="w-full h-16 pl-6 pr-36 rounded-full border-2 border-border bg-card text-foreground focus:border-primary focus:outline-none text-lg shadow-lg transition-colors"
+                            />
+                            <button className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 rounded-full font-bold transition-colors flex items-center gap-2">
+                                <FontAwesomeIcon icon={faSearch} />
+                                Search
+                            </button>
+                        </div>
+
+                        {/* TLD Grid */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                            {tlds.map((tld, index) => (
+                                <motion.div
+                                    key={tld.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    className="bg-card border border-border p-4 rounded-xl text-center hover:border-primary/50 transition-colors shadow-sm"
+                                >
+                                    <div className="font-bold text-xl text-foreground mb-1">{tld.name}</div>
+                                    <div className="text-primary font-bold">{tld.price}</div>
+                                    <div className="text-xs text-muted-foreground line-through">{tld.original}</div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Web Hosting Section */}
+                <div>
+                    <div className="text-center mb-16">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <h2 className="heading-md mb-4">Web Hosting Made Easy</h2>
+                            <p className="text-body max-w-2xl mx-auto">
+                                Choose the perfect hosting plan for your website. Speed, security, and support included.
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 text-left">
+                        {hostingPlans.map((plan, index) => (
+                            <motion.div
+                                key={plan.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className={`relative p-8 rounded-3xl border ${plan.popular
+                                    ? 'bg-primary text-primary-foreground border-primary shadow-xl scale-105 z-10'
+                                    : 'bg-card border-border shadow-lg hover:border-primary/30 transition-colors'
+                                    }`}
+                            >
+                                {plan.popular && (
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-foreground text-background text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                                        Most Popular
+                                    </div>
+                                )}
+
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-2xl ${plan.popular ? 'bg-primary-foreground/20 text-primary-foreground' : 'bg-primary/10 text-primary'
+                                    }`}>
+                                    <FontAwesomeIcon icon={plan.icon} />
+                                </div>
+
+                                <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-primary-foreground' : 'text-foreground'}`}>
+                                    {plan.title}
+                                </h3>
+                                <p className={`mb-6 ${plan.popular ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
+                                    {plan.description}
+                                </p>
+
+                                <div className="flex items-baseline gap-1 mb-8">
+                                    <span className={`text-4xl font-bold ${plan.popular ? 'text-primary-foreground' : 'text-foreground'}`}>
+                                        {plan.price}
+                                    </span>
+                                    <span className={`${plan.popular ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
+                                        {plan.period}
+                                    </span>
+                                </div>
+
+                                <ul className="space-y-4 mb-8">
+                                    {plan.features.map((feature) => (
+                                        <li key={feature} className="flex items-center gap-3">
+                                            <FontAwesomeIcon icon={faCheck} className={`w-4 h-4 ${plan.popular ? 'text-primary-foreground' : 'text-primary'}`} />
+                                            <span className={`${plan.popular ? 'text-primary-foreground/90' : 'text-foreground/80'}`}>
+                                                {feature}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <Link
+                                    href="/pricing"
+                                    className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-opacity hover:opacity-90 ${plan.popular
+                                        ? 'bg-primary-foreground text-primary'
+                                        : 'bg-primary text-primary-foreground'
+                                        }`}
+                                >
+                                    Get Started
+                                    <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    );
+};
