@@ -305,20 +305,50 @@ export default function Quote() {
                                     <label className="block font-medium mb-4">
                                         What's your estimated budget? *
                                     </label>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                                        {budgetRanges.map((range) => (
-                                            <button
-                                                key={range}
-                                                type="button"
-                                                onClick={() => setFormData({ ...formData, budget: range })}
-                                                className={`px-3 py-3 rounded-lg border-2 transition-all duration-300 text-sm ${formData.budget === range
-                                                    ? 'border-primary bg-primary/10'
-                                                    : 'border-border hover:border-primary/50'
-                                                    }`}
-                                            >
-                                                {range}
-                                            </button>
-                                        ))}
+                                    <div className="bg-secondary/50 rounded-xl p-6 border border-border">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div className="flex-1">
+                                                <label className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1.5 block">
+                                                    Minimum
+                                                </label>
+                                                <div className="w-full px-4 py-3 rounded-lg border border-border bg-background/50 text-muted-foreground font-medium cursor-not-allowed flex items-center gap-1">
+                                                    <span>$</span>
+                                                    <span>80</span>
+                                                </div>
+                                            </div>
+                                            <div className="text-muted-foreground pt-6">-</div>
+                                            <div className="flex-1">
+                                                <label htmlFor="custom_budget" className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1.5 block">
+                                                    Maximum
+                                                </label>
+                                                <div className="relative">
+                                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                                                    <input
+                                                        type="number"
+                                                        id="custom_budget"
+                                                        min="80"
+                                                        placeholder="Enter amount"
+                                                        className="w-full pl-8 pr-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary font-medium"
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            setFormData({
+                                                                ...formData,
+                                                                budget: val ? `$80 - $${val}` : ''
+                                                            });
+                                                        }}
+                                                        // Extract key part for controlled input if needed, but simple onChange updating formatted string works for submission.
+                                                        // However, to show the value back we'd need to parse step.
+                                                        // Since we don't persist state perfectly between complex edits without parsing, 
+                                                        // let's just use defaultValue or separate state if we step back/forward.
+                                                        // For simplicity in this edit, I'll use the formData to drive value if it exists.
+                                                        value={formData.budget.startsWith('$80 - $') ? formData.budget.replace('$80 - $', '') : ''}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                            Our services start from $80. Please specify your maximum budget.
+                                        </p>
                                     </div>
                                 </div>
                                 <div>
