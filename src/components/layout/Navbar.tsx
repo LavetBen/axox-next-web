@@ -80,7 +80,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBg}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${navBg}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);

@@ -4,8 +4,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import chicagoImg from '@/assets/chicag.jpg';
-
 export const CTASection = () => {
   return (
     <section className="section-padding bg-background">
@@ -17,14 +15,9 @@ export const CTASection = () => {
           transition={{ duration: 0.6 }}
           className="bg-primary rounded-3xl p-12 md:p-20 text-center relative overflow-hidden group"
         >
-          {/* Background Image */}
+          {/* Background Gradient */}
           <div
-            className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105"
-            style={{
-              backgroundImage: `url(${chicagoImg.src})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+            className="absolute inset-0 z-0 bg-gradient-to-br from-primary via-axox-orange to-black opacity-30"
           />
           {/* Overlay */}
           <div className="absolute inset-0 bg-primary/90 z-0" />
@@ -57,8 +50,8 @@ export const CTASection = () => {
               </Link>
             </div>
           </div>
-        </motion.div>
-      </div>
-    </section>
+        </motion.div >
+      </div >
+    </section >
   );
 };

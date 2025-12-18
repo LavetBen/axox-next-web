@@ -46,11 +46,7 @@ export const HeroSection = () => {
       <div className="section-container relative z-10 pt-32 md:pt-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="animate-fade-in-up">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-foreground">
               <span className="block mb-2">We Build</span>
               <span className="text-primary block mb-2 h-[1.2em] overflow-hidden">
@@ -105,7 +101,7 @@ export const HeroSection = () => {
                 <div className="text-muted-foreground text-sm md:text-base">Years Experience</div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Content - Animation */}
           <motion.div
