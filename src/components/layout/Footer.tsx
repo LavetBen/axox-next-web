@@ -224,10 +224,10 @@ export const Footer = () => {
               © {new Date().getFullYear()} Axox. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="/privacy" className="text-background/60 hover:text-primary transition-colors">
+              <Link href="/privacy-policy" className="text-background/60 hover:text-primary transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-background/60 hover:text-primary transition-colors">
+              <Link href="/terms-of-service" className="text-background/60 hover:text-primary transition-colors">
                 Terms of Service
               </Link>
             </div>
