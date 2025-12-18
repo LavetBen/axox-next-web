@@ -332,13 +332,20 @@ export default function Contact() {
             </section>
 
             {/* Map Section */}
-            <section className="h-96 bg-secondary">
-                <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-center">
-                        <FontAwesomeIcon icon={faLocationDot} className="w-16 h-16 text-primary mb-4" />
-                        <p className="text-muted-foreground">
-                            Mount Pleasant, Harare
-                        </p>
+            <section className="section-padding bg-background">
+                <div className="section-container">
+                    <div className="h-96 md:h-[500px] w-full bg-secondary relative rounded-3xl overflow-hidden shadow-lg border border-border">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Mount%20Pleasant%2C%20Harare&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Axox Location"
+                            className="absolute inset-0 grayscale hover:grayscale-0 transition-all duration-500"
+                        />
                     </div>
                 </div>
             </section>
