@@ -197,38 +197,7 @@ export default function Services() {
                 </div>
             </section>
 
-            {/* Custom System CTA */}
-            <section className="section-padding bg-background">
-                <div className="section-container">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="bg-foreground rounded-3xl p-12 md:p-20 text-center max-w-5xl mx-auto relative overflow-hidden"
-                    >
-                        {/* Background Decor */}
-                        <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
-
-                        <div className="relative z-10">
-                            <h2 className="heading-lg text-background mb-6">
-                                Need a Custom System?
-                            </h2>
-                            <p className="text-xl text-background/70 mb-8 max-w-2xl mx-auto">
-                                Don't see exactly what you need? We specialize in building custom
-                                solutions tailored to your specific requirements.
-                            </p>
-                            <Link
-                                href="/quote"
-                                className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold transition-all duration-300 hover:opacity-90 inline-flex items-center gap-2"
-                            >
-                                Request a Custom System
-                                <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
+            
 
             <CTASection />
         </>
