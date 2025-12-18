@@ -36,22 +36,20 @@ export const TextAnimate: FC<TextAnimateProps> = ({
 
   const childVariants: Variants = {
     hidden: {
-      y: animation === 'blurInUp' ? 10 : animation === 'blurInDown' ? -10 : 0,
+      y: animation === 'blurInUp' ? 20 : animation === 'blurInDown' ? -20 : 0,
       opacity: 0,
-      filter: 'blur(8px)'
     },
     visible: {
       y: 0,
       opacity: 1,
-      filter: 'blur(0px)',
       transition: {
         duration: duration,
+        ease: "easeOut"
       },
     },
     exit: {
-      y: animation === 'blurInUp' ? -10 : 10,
+      y: animation === 'blurInUp' ? -20 : 20,
       opacity: 0,
-      filter: 'blur(8px)',
       transition: {
         duration: 0.2
       }
