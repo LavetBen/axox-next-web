@@ -27,7 +27,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % phrases.length);
-    }, 2500);
+    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
@@ -56,12 +56,12 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.5 }}
                   >
                     <TextAnimate
                       animation="blurInUp"
                       by="character"
-                      duration={0.5}
+                      duration={1.0}
                     >
                       {phrases[index]}
                     </TextAnimate>

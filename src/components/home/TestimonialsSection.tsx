@@ -39,72 +39,83 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <section className="section-padding bg-background">
+    <section className="py-12 bg-background">
       <div className="section-container">
-        <div className="bg-secondary rounded-3xl p-8 md:p-16">
-          <SectionHeading
-            tag="Testimonials"
-            title="What Our Clients Say"
-            subtitle="Don't just take our word for it. Here's what our satisfied clients have to say about working with us."
-          />
+        <div className="bg-secondary/50 rounded-2xl p-6 md:p-10 relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto relative">
+          <div className="text-center mb-8">
+            <h2 className="heading-md mb-2">What Our Clients Say</h2>
+            <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+              Don't just take our word for it. Here's what our satisfied clients have to say.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-background rounded-3xl p-8 md:p-12 text-center shadow-sm"
+                className="bg-background rounded-2xl p-6 shadow-sm border border-border/50 text-center relative z-10"
               >
-                <FontAwesomeIcon icon={faQuoteLeft} className="w-12 h-12 text-primary mb-6" />
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground shadow-lg">
+                  <FontAwesomeIcon icon={faQuoteLeft} className="w-3 h-3" />
+                </div>
+
+                <p className="text-base md:text-lg text-foreground leading-relaxed mb-6 pt-2 italic">
                   "{testimonials[currentIndex].content}"
                 </p>
-                <div>
-                  <div className="w-16 h-16 bg-foreground rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-background text-xl font-bold">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <span className="text-primary text-sm font-bold">
                       {testimonials[currentIndex].name.charAt(0)}
                     </span>
                   </div>
-                  <h4 className="font-bold text-foreground">{testimonials[currentIndex].name}</h4>
-                  <p className="text-muted-foreground">{testimonials[currentIndex].role}</p>
+                  <div className="text-left">
+                    <h4 className="font-bold text-sm text-foreground">{testimonials[currentIndex].name}</h4>
+                    <p className="text-xs text-muted-foreground">{testimonials[currentIndex].role}</p>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-center gap-4 mt-8">
+            <div className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 -right-4 md:-right-12 flex justify-between z-0 pointer-events-none">
               <button
                 onClick={prev}
-                className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center transition-all duration-300 hover:bg-primary"
+                className="w-10 h-10 rounded-full bg-background border border-border text-foreground flex items-center justify-center transition-all duration-300 hover:bg-primary hover:text-primary-foreground pointer-events-auto shadow-sm"
                 aria-label="Previous testimonial"
               >
-                <FontAwesomeIcon icon={faChevronLeft} className="w-5 h-5" />
+                <FontAwesomeIcon icon={faChevronLeft} className="w-3 h-3" />
               </button>
               <button
                 onClick={next}
-                className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center transition-all duration-300 hover:bg-primary"
+                className="w-10 h-10 rounded-full bg-background border border-border text-foreground flex items-center justify-center transition-all duration-300 hover:bg-primary hover:text-primary-foreground pointer-events-auto shadow-sm"
                 aria-label="Next testimonial"
               >
-                <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
+                <FontAwesomeIcon icon={faChevronRight} className="w-3 h-3" />
               </button>
             </div>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary w-8' : 'bg-foreground/30'
-                    }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
           </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-1.5 mt-6">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary w-6' : 'bg-foreground/20 w-1.5'
+                  }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
