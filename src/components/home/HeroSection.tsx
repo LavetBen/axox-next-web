@@ -5,9 +5,13 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faPlay } from '@fortawesome/free-solid-svg-icons';
-import Lottie from 'lottie-react';
-import codeDarkAnimation from '@/assets/code_dark.json';
 import { TextAnimate } from '@/components/magicui/text-animate';
+import dynamic from 'next/dynamic';
+
+const HeroAnimation = dynamic(() => import('./HeroAnimation').then(mod => mod.HeroAnimation), {
+  ssr: false,
+  loading: () => <div className="w-full aspect-square bg-gray-100 rounded-3xl animate-pulse" />
+});
 
 const phrases = [
   'Powerful Software',
@@ -110,13 +114,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="w-full aspect-square rounded-3xl flex items-center justify-center relative overflow-hidden max-w-sm mx-auto lg:max-w-none">
-              <Lottie
-                animationData={codeDarkAnimation}
-                loop={true}
-                className="w-full h-full"
-              />
-            </div>
+            <HeroAnimation />
           </motion.div>
         </div>
       </div>

@@ -1,17 +1,23 @@
 import { HeroSection } from '@/components/home/HeroSection';
-import { DomainHostingSection } from '@/components/home/DomainHostingSection';
-import { ServicesSection } from '@/components/home/ServicesSection';
-import { WhyChooseUsSection } from '@/components/home/WhyChooseUsSection';
-import { ProjectsSection } from '@/components/home/ProjectsSection';
-import { TestimonialsSection } from '@/components/home/TestimonialsSection';
-import { CTASection } from '@/components/home/CTASection';
+import dynamic from 'next/dynamic';
 
-export default function Home() {
+const DomainHostingSection = dynamic(() => import('@/components/home/DomainHostingSection').then(mod => mod.DomainHostingSection));
+const ServicesSection = dynamic(() => import('@/components/home/ServicesSection').then(mod => mod.ServicesSection));
+const WhyChooseUsSection = dynamic(() => import('@/components/home/WhyChooseUsSection').then(mod => mod.WhyChooseUsSection));
+const ProjectsSection = dynamic(() => import('@/components/home/ProjectsSection').then(mod => mod.ProjectsSection));
+const TestimonialsSection = dynamic(() => import('@/components/home/TestimonialsSection').then(mod => mod.TestimonialsSection));
+const CTASection = dynamic(() => import('@/components/home/CTASection').then(mod => mod.CTASection));
+
+import { fetchServices } from '@/lib/api/services';
+
+export default async function Home() {
+  const services = await fetchServices();
+
   return (
     <>
       <HeroSection />
       <DomainHostingSection />
-      <ServicesSection />
+      <ServicesSection services={services} />
       <WhyChooseUsSection />
       <ProjectsSection />
       <TestimonialsSection />

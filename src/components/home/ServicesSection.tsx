@@ -13,35 +13,21 @@ import {
   faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { SectionHeading } from '../ui/SectionHeading';
-import { useQuery } from '@tanstack/react-query';
-import { fetchServices } from '@/lib/api/services';
 import { getIcon } from '@/lib/icon-mapping';
+import type { Service } from '@/lib/api/services';
 
+interface ServicesSectionProps {
+  services: Service[];
+}
 
-
-export const ServicesSection = () => {
-  const { data: fetchedServices, isLoading } = useQuery({
-    queryKey: ['services'],
-    queryFn: fetchServices,
-  });
-
-  const displayServices = fetchedServices ? fetchedServices.map(s => ({
+export const ServicesSection = ({ services }: ServicesSectionProps) => {
+  const displayServices = services ? services.map(s => ({
     ...s,
     icon: getIcon(s.iconName)
   })) : [];
 
-  if (isLoading) {
-    return (
-      <section className="section-padding bg-background">
-        <div className="section-container flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-        </div>
-      </section>
-    );
-  }
-
-  if (!isLoading && displayServices.length === 0) {
-    return null; // Or return a message, but for a home section, hiding perfectly valid.
+  if (!displayServices.length) {
+    return null;
   }
 
   return (
