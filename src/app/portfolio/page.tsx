@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faExternalLinkAlt, faGlobe, faMobileAlt, faDesktop, faCloud, faPlug, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/home/CTASection';
-import nexaPreview from '@/assets/nexa-preview.png';
-import unifyPreview from '@/assets/unify-preview.png';
+import nexaPreview from '@/assets/school.jpg';
+import unifyPreview from '@/assets/realestate.jpg';
 import budgetAppPreview from '@/assets/budget-app-preview.png';
 import Image, { StaticImageData } from 'next/image';
 
