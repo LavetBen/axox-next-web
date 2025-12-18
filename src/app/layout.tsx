@@ -10,7 +10,10 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Axox - Premium Software Development Company",
+  title: {
+    default: "Axox - Premium Software Development Company",
+    template: "%s | Axox"
+  },
   description: "Axox is a leading technology company specializing in custom software development, web applications, mobile apps, desktop systems, and API integrations. We build powerful software for the future.",
   keywords: ["software development", "web development", "mobile apps", "custom systems", "API development", "technology consulting"],
   authors: [{ name: "Axox" }],
