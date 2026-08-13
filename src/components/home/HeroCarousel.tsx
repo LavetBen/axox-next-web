@@ -74,8 +74,8 @@ export const HeroCarousel = () => {
   }, []);
 
   return (
-    <section className="w-full bg-white pt-[104px] pb-12 flex items-center justify-center">
-      <div className="section-container w-full h-[500px] lg:h-[560px] flex gap-3 md:gap-4 group/carousel">
+    <section className="w-full bg-white pt-[90px] md:pt-[104px] pb-8 md:pb-12 flex items-center justify-center">
+      <div className="section-container w-full h-[650px] md:h-[500px] lg:h-[560px] flex flex-col md:flex-row gap-2 md:gap-4 group/carousel">
         {slides.map((slide, idx) => {
           const isActive = idx === activeIndex;
 
@@ -84,10 +84,10 @@ export const HeroCarousel = () => {
               key={slide.id}
               layout
               onClick={() => !isActive && setActiveIndex(idx)}
-              className={`relative overflow-hidden rounded-2xl flex flex-col transition-opacity duration-300 ${
+              className={`relative overflow-hidden rounded-2xl flex transition-all duration-300 ${
                 isActive
                   ? "flex-grow cursor-default"
-                  : "w-16 md:w-24 cursor-pointer opacity-90 hover:opacity-100"
+                  : "h-[72px] md:h-auto w-full md:w-24 cursor-pointer opacity-90 hover:opacity-100"
               } ${slide.bgGradient}`}
               transition={{ type: "spring", stiffness: 250, damping: 30 }}
             >
@@ -115,42 +115,42 @@ export const HeroCarousel = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3, delay: 0.2 }}
-                    className="absolute inset-0 p-8 md:p-14 flex flex-col justify-between text-white z-10"
+                    className="absolute inset-0 p-6 md:p-14 flex flex-col justify-between text-white z-10"
                   >
                     {/* Top Row: Label */}
                     <div className="flex justify-end w-full">
-                      <div className="flex items-center gap-2 text-body-standard text-white/80 tracking-wide font-medium">
+                      <div className="flex items-center gap-2 text-sm md:text-body-standard text-white/80 tracking-wide font-medium">
                         {slide.label} <span className="text-[10px]">○</span>
                       </div>
                     </div>
 
                     {/* Middle Content */}
-                    <div className="max-w-2xl mt-8">
-                      <h1 className="heading-display-1 mb-6 text-white">
+                    <div className="max-w-2xl mt-auto md:mt-8 overflow-y-auto pb-4 md:pb-0 scrollbar-hide">
+                      <h1 className="text-3xl md:text-[3.5rem] leading-[1.15] md:leading-[1.1] tracking-tight font-medium mb-4 md:mb-6 text-white">
                         {slide.title}
                       </h1>
-                      <p className="text-body-large text-white/80 max-w-xl">
+                      <p className="text-[15px] md:text-lg text-white/80 max-w-xl">
                         {slide.subtitle}
                       </p>
                     </div>
 
                     {/* Bottom Row */}
-                    <div className="flex flex-col md:flex-row items-start md:items-end justify-end mt-auto gap-8 md:gap-0">
+                    <div className="flex flex-col md:flex-row items-start md:items-end justify-end mt-4 md:mt-auto gap-8 md:gap-0">
                       {/* Controls */}
                       <div className="flex items-center gap-4">
                         <button
                           onClick={handlePrev}
-                          className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all"
+                          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all"
                           aria-label="Previous slide"
                         >
-                          <ChevronLeft className="w-5 h-5" />
+                          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                         <button
                           onClick={handleNext}
-                          className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all"
+                          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all"
                           aria-label="Next slide"
                         >
-                          <ChevronRight className="w-5 h-5" />
+                          <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                       </div>
                     </div>
@@ -162,14 +162,14 @@ export const HeroCarousel = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex flex-col justify-between items-center py-8 text-white/80 hover:text-white z-10"
+                    className="absolute inset-0 flex flex-row md:flex-col justify-between items-center px-6 py-0 md:px-0 md:py-8 text-white/80 hover:text-white z-10"
                   >
-                    <div className="flex-1 w-full flex justify-center items-start mt-8 relative">
-                      <div className="absolute whitespace-nowrap -rotate-90 origin-center text-base tracking-widest flex items-center gap-3 top-1/3">
-                        {slide.label} <span className="text-[10px]">○</span>
+                    <div className="flex-1 h-full md:w-full flex justify-start items-center md:items-start md:mt-8 relative">
+                      <div className="md:absolute whitespace-nowrap md:-rotate-90 md:origin-center text-[15px] md:text-base tracking-widest flex items-center gap-3 md:top-1/3">
+                        {slide.label} <span className="text-[10px] hidden md:inline">○</span>
                       </div>
                     </div>
-                    <div className="mt-auto w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover/carousel:bg-white/10 transition-colors">
+                    <div className="mt-0 ml-auto md:ml-0 md:mt-auto w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/30 flex items-center justify-center group-hover/carousel:bg-white/10 transition-colors">
                       <Plus className="w-4 h-4" />
                     </div>
                   </motion.div>

@@ -74,18 +74,18 @@ export const LoanManagementSection = () => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 xl:gap-16 relative">
           
           {/* Left Navigation */}
-          <div className="w-full lg:w-[280px] flex-shrink-0 flex flex-col gap-2">
+          <div className="w-full lg:w-[280px] flex-shrink-0 flex flex-row lg:flex-col gap-3 lg:gap-2 overflow-x-auto pb-4 lg:pb-0 snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center text-left py-4 px-2 group focus:outline-none transition-colors duration-300 ${
-                    isActive ? 'text-white' : 'text-white/60 hover:text-white/80'
+                  className={`flex items-center flex-shrink-0 snap-start text-left py-2.5 px-4 lg:py-4 lg:px-2 rounded-full lg:rounded-none group focus:outline-none transition-colors duration-300 ${
+                    isActive ? 'text-white bg-white/10 lg:bg-transparent' : 'text-white/60 hover:text-white/80 bg-white/5 lg:bg-transparent'
                   }`}
                 >
-                  <div className="w-6 flex-shrink-0 overflow-hidden relative h-5 flex items-center">
+                  <div className="w-6 flex-shrink-0 overflow-hidden relative h-5 hidden lg:flex items-center">
                     <AnimatePresence>
                       {isActive && (
                         <motion.div
@@ -100,7 +100,7 @@ export const LoanManagementSection = () => {
                       )}
                     </AnimatePresence>
                   </div>
-                  <span className={`text-lg transition-all duration-300 ${isActive ? 'font-medium translate-x-1' : 'font-light'}`}>
+                  <span className={`text-[15px] lg:text-lg transition-all duration-300 ${isActive ? 'font-medium lg:translate-x-1' : 'font-light'}`}>
                     {tab.label}
                   </span>
                 </button>

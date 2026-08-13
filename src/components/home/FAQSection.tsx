@@ -58,7 +58,7 @@ export const FAQSection = () => {
                   onClick={() => toggleFaq(faq.id)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                 >
-                  <div className="flex text-lg font-normal">
+                  <div className="flex text-base md:text-lg font-normal">
                     <span className="text-electric-blue mr-2">Q:</span>
                     <span className="text-charcoal">{faq.question}</span>
                   </div>

@@ -7,7 +7,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export const CTASection = () => {
   return (
-    <section className="relative py-20 md:py-32 bg-black overflow-hidden font-cerebri">
+    <section className="relative py-16 md:py-32 bg-black overflow-hidden font-cerebri">
       {/* Subtle dotted background pattern to mimic the map from the image */}
       <div 
         className="absolute inset-0 opacity-10 pointer-events-none"

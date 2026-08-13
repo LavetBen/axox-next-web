@@ -12,14 +12,45 @@ import {
   faUtensils,
   faHospital,
   faBuilding,
+  faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
 
 const industryLinks = [
-  { name: 'Fintech', path: '/industries/fintech', icon: faCreditCard, color: '#0000ff' },
-  { name: 'Energy', path: '/industries/energy', icon: faBolt, color: '#f59e0b' },
-  { name: 'Food', path: '/industries/food', icon: faUtensils, color: '#22c55e' },
-  { name: 'Healthcare', path: '/industries/healthcare', icon: faHospital, color: '#ef4444' },
-  { name: 'Real Estate', path: '/industries/real-estate', icon: faBuilding, color: '#8b5cf6' },
+  {
+    name: 'Fintech',
+    path: '/industries/fintech',
+    icon: faCreditCard,
+    color: '#000000',
+    description: 'Digital banking, payments & loan management systems.',
+  },
+  {
+    name: 'Energy',
+    path: '/industries/energy',
+    icon: faBolt,
+    color: '#000000',
+    description: 'Smart metering, grid monitoring & billing platforms.',
+  },
+  {
+    name: 'Food',
+    path: '/industries/food',
+    icon: faUtensils,
+    color: '#000000',
+    description: 'POS, traceability & supply chain management for food.',
+  },
+  {
+    name: 'Healthcare',
+    path: '/industries/healthcare',
+    icon: faHospital,
+    color: '#000000',
+    description: 'Hospital systems, EMR & telemedicine platforms.',
+  },
+  {
+    name: 'Real Estate',
+    path: '/industries/real-estate',
+    icon: faBuilding,
+    color: '#000000',
+    description: 'PropTech, listing portals & tenant management tools.',
+  },
 ];
 
 const navLinks = [
@@ -52,7 +83,6 @@ export const Navbar = () => {
     setIsIndustriesOpen(false);
   }, [pathname]);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -66,137 +96,155 @@ export const Navbar = () => {
   const primaryLinks = navLinks.slice(0, 4);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)]' : 'bg-white'
-      }`}
-    >
-      <div className="border-b border-gray-100">
-        <nav className="section-container relative z-50">
-          <div className="flex items-center justify-between h-[72px] relative">
-            {/* Logo */}
-            <div className="flex-1 flex items-center">
-              <Link href="/" className="flex items-center group w-fit">
-                <span className="text-charcoal text-[28px] font-bold tracking-tight lowercase">
-                  axox
-                </span>
-                <span className="text-charcoal text-[10px] self-start mt-1.5 ml-0.5">®</span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden xl:flex items-center justify-center gap-8">
-              {primaryLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors group"
-                >
-                  {link.name}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)]' : 'bg-white'
+        }`}
+      >
+        <div className="border-b border-gray-100">
+          <nav className="section-container relative z-50">
+            <div className="flex items-center justify-between h-[72px] relative">
+              {/* Logo */}
+              <div className="flex-1 flex items-center">
+                <Link href="/" className="flex items-center group w-fit">
+                  <span className="text-charcoal text-[28px] font-bold tracking-tight lowercase">
+                    axox
+                  </span>
+                  <span className="text-charcoal text-[10px] self-start mt-1.5 ml-0.5">®</span>
                 </Link>
-              ))}
+              </div>
 
-              {/* Industries Dropdown */}
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setIsIndustriesOpen(!isIndustriesOpen)}
+              {/* Desktop Navigation */}
+              <div className="hidden xl:flex items-center justify-center gap-8">
+                {primaryLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+
+                {/* Industries Mega Menu Trigger */}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onMouseEnter={() => setIsIndustriesOpen(true)}
+                    onClick={() => setIsIndustriesOpen(!isIndustriesOpen)}
+                    className={`flex items-center gap-1.5 text-[13px] font-semibold tracking-wide uppercase transition-colors ${
+                      isIndustriesOpen ? 'text-electric-blue' : 'text-charcoal hover:text-black'
+                    }`}
+                  >
+                    INDUSTRIES
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${isIndustriesOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                </div>
+
+                <Link
+                  href="/quote"
                   className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
                 >
-                  INDUSTRIES
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${isIndustriesOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
+                  GET QUOTE
+                </Link>
+              </div>
 
-                <AnimatePresence>
-                  {isIndustriesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                      transition={{ duration: 0.18, ease: 'easeOut' }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[320px] bg-white border border-gray-100 shadow-xl shadow-black/10 rounded-sm overflow-hidden z-50"
+              {/* Right Actions */}
+              <div className="hidden lg:flex flex-1 items-center justify-end gap-6">
+                <div className="flex items-center gap-3">
+                  <Link
+                    href="/contact"
+                    className="bg-charcoal text-white px-5 h-[42px] rounded-full font-semibold text-[14.5px] flex items-center justify-center gap-2 hover:bg-black transition-colors"
+                  >
+                    Contact us
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                  <button
+                    className="w-[42px] h-[42px] rounded-full bg-[#EEF0F4] flex items-center justify-center text-charcoal hover:bg-[#E2E6EC] transition-colors"
+                    aria-label="Search"
+                  >
+                    <Search className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="xl:hidden w-10 h-10 flex items-center justify-center text-charcoal"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        {/* ── Mega Menu ── */}
+        <AnimatePresence>
+          {isIndustriesOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              className="hidden xl:block absolute left-0 right-0 bg-white border-b border-gray-100 shadow-xl shadow-black/10 z-40"
+              onMouseLeave={() => setIsIndustriesOpen(false)}
+            >
+              <div className="section-container py-8">
+                {/* Section label */}
+                <p className="text-[13px] font-semibold tracking-wide uppercase text-gray-400 mb-6">
+                  INDUSTRIES
+                </p>
+
+                {/* 3-column industry grid */}
+                <div className="grid grid-cols-3 gap-x-8 gap-y-1">
+                  {industryLinks.map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => setIsIndustriesOpen(false)}
+                      className="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50/80 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] group border border-transparent hover:border-gray-100"
                     >
-                      {/* Dropdown header */}
-                      <div className="px-5 py-3 bg-[#1a1a24] border-b border-white/5">
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-semibold">
-                          Industries We Serve
+                      {/* Icon */}
+                      <div className="flex-shrink-0 mt-1 transition-transform duration-300 group-hover:-translate-y-0.5">
+                        <FontAwesomeIcon
+                          icon={item.icon}
+                          className="w-[14px] h-[14px] text-black"
+                        />
+                      </div>
+
+                      {/* Text */}
+                      <div className="min-w-0">
+                        <p className="text-[14px] font-bold text-charcoal group-hover:text-electric-blue transition-colors leading-snug mb-1">
+                          {item.name}
+                        </p>
+                        <p className="text-[12px] text-gray-500 leading-relaxed font-light">
+                          {item.description}
                         </p>
                       </div>
+                    </Link>
+                  ))}
+                </div>
 
-                      {/* Industry items */}
-                      <div className="py-2">
-                        {industryLinks.map((item) => (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            onClick={() => setIsIndustriesOpen(false)}
-                            className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50 transition-colors group"
-                          >
-                            <div
-                              className="w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-105"
-                              style={{ background: `${item.color}18`, border: `1px solid ${item.color}30` }}
-                            >
-                              <FontAwesomeIcon
-                                icon={item.icon}
-                                className="w-3.5 h-3.5"
-                                style={{ color: item.color }}
-                              />
-                            </div>
-                            <div>
-                              <p className="text-[13px] font-semibold text-charcoal group-hover:text-black transition-colors">
-                                {item.name}
-                              </p>
-                            </div>
-                            <ArrowUpRight
-                              className="w-3.5 h-3.5 ml-auto text-gray-300 group-hover:text-gray-500 transition-colors"
-                            />
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Footer link */}
+                <div className="mt-6 pt-5 border-t border-gray-100">
+                  <Link
+                    href="/industries"
+                    onClick={() => setIsIndustriesOpen(false)}
+                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.15em] text-electric-blue hover:opacity-75 transition-opacity"
+                  >
+                    VIEW ALL INDUSTRIES
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3" />
+                  </Link>
+                </div>
               </div>
-
-              <Link
-                href="/quote"
-                className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
-              >
-                GET QUOTE
-              </Link>
-            </div>
-
-            {/* Right Actions */}
-            <div className="hidden lg:flex flex-1 items-center justify-end gap-6">
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/contact"
-                  className="bg-charcoal text-white px-5 h-[42px] rounded-full font-semibold text-[14.5px] flex items-center justify-center gap-2 hover:bg-black transition-colors"
-                >
-                  Contact us
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-                <button
-                  className="w-[42px] h-[42px] rounded-full bg-[#EEF0F4] flex items-center justify-center text-charcoal hover:bg-[#E2E6EC] transition-colors"
-                  aria-label="Search"
-                >
-                  <Search className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden w-10 h-10 flex items-center justify-center text-charcoal"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </nav>
-      </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -241,15 +289,15 @@ export const Navbar = () => {
                       <Link
                         key={item.path}
                         href={item.path}
-                        className="flex items-center gap-3 py-3 pl-4 border-b border-gray-50"
+                        className="flex items-center gap-3 py-3 pl-4 border-b border-gray-50 group"
                       >
-                        <div
-                          className="w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0"
-                          style={{ background: `${item.color}18` }}
-                        >
-                          <FontAwesomeIcon icon={item.icon} className="w-3 h-3" style={{ color: item.color }} />
+                        <div className="flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:-translate-y-0.5">
+                          <FontAwesomeIcon icon={item.icon} className="w-3 h-3 text-black" />
                         </div>
-                        <span className="text-lg font-medium text-charcoal">{item.name}</span>
+                        <div>
+                          <p className="text-base font-semibold text-charcoal">{item.name}</p>
+                          <p className="text-[12px] text-gray-500">{item.description}</p>
+                        </div>
                       </Link>
                     ))}
                   </motion.div>
@@ -273,6 +321,6 @@ export const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
