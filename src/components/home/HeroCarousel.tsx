@@ -75,7 +75,7 @@ export const HeroCarousel = () => {
 
   return (
     <section className="w-full bg-white pt-[90px] md:pt-[104px] pb-8 md:pb-12 flex items-center justify-center">
-      <div className="section-container w-full h-[650px] md:h-[500px] lg:h-[560px] flex flex-col md:flex-row gap-2 md:gap-4 group/carousel">
+      <div className="section-container w-full h-[calc(100vh-122px)] md:h-[500px] lg:h-[560px] flex flex-col md:flex-row gap-2 md:gap-4 group/carousel">
         {slides.map((slide, idx) => {
           const isActive = idx === activeIndex;
 
