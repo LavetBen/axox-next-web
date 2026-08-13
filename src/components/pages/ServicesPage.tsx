@@ -164,21 +164,25 @@ export function ServicesPage() {
             <section className="py-24 bg-white">
                 <div className="section-container">
                     {/* Header Bar */}
-                    <div className="bg-gray-100 py-4 px-6 border border-gray-200 border-b-0 font-medium text-charcoal text-[16px] tracking-wide">
-                        A Selection of Our Digital Services and What They Will Deliver for You
+                    <div className="bg-[#1a1a24] text-white py-5 px-8 rounded-t-sm font-medium text-[16px] tracking-wide flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-lg shadow-electric-blue/10 gap-2">
+                        <span className="text-electric-blue font-bold tracking-wider uppercase text-sm">Our Capabilities</span>
+                        <span className="font-light opacity-80 text-sm">A Selection of Our Digital Services and What They Will Deliver for You</span>
                     </div>
                     
-                    {/* Dotted Grid */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dotted border-gray-400">
+                    {/* Grid */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 border-l border-gray-100 shadow-xl shadow-gray-200/50 rounded-b-sm overflow-hidden">
                         {services.map((service) => (
                             <div 
                                 key={service.title}
-                                className="p-8 md:p-10 flex flex-col h-full border-b border-r border-dotted border-gray-400 hover:bg-gray-50 transition-colors duration-300"
+                                className="p-8 md:p-10 flex flex-col h-full border-b border-r border-gray-100 hover:bg-electric-blue/[0.02] hover:border-electric-blue/20 transition-all duration-300 group bg-white"
                             >
-                                <h3 className="text-[22px] font-light text-charcoal mb-4">
+                                <div className="w-14 h-14 rounded-sm bg-electric-blue/10 flex items-center justify-center mb-6 text-electric-blue group-hover:bg-electric-blue group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-md group-hover:shadow-electric-blue/20 group-hover:-translate-y-1">
+                                    <FontAwesomeIcon icon={service.icon} className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-[22px] font-medium text-charcoal mb-4 group-hover:text-electric-blue transition-colors duration-300">
                                     {service.title}
                                 </h3>
-                                <p className="text-[15px] text-gray-500 font-light leading-relaxed mb-10 flex-grow">
+                                <p className="text-[15px] text-gray-500 font-light leading-relaxed mb-10 flex-grow group-hover:text-gray-700 transition-colors duration-300">
                                     {service.description}
                                 </p>
                                 
@@ -214,18 +218,18 @@ export function ServicesPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="border border-dotted border-gray-400"
+                        className="border border-gray-100 rounded-sm overflow-hidden shadow-xl shadow-electric-blue/5 bg-white"
                     >
                         {processSteps.map((step, index) => (
                             <div 
                                 key={step.step}
-                                className={`grid md:grid-cols-[240px_1fr] ${
-                                    index !== processSteps.length - 1 ? 'border-b border-dotted border-gray-400' : ''
+                                className={`grid md:grid-cols-[240px_1fr] hover:bg-electric-blue/[0.02] transition-colors duration-300 group ${
+                                    index !== processSteps.length - 1 ? 'border-b border-gray-100' : ''
                                 }`}
                             >
                                 {/* Left Column: Step Indicator */}
-                                <div className="p-8 md:p-10 md:border-r border-dotted border-gray-400 flex items-center md:items-start">
-                                    <span className="text-lg md:text-xl font-light text-charcoal tracking-wide">
+                                <div className="p-8 md:p-10 md:border-r border-gray-100 flex items-center md:items-start bg-gray-50/50 group-hover:bg-electric-blue/5 transition-colors duration-300">
+                                    <span className="text-lg md:text-xl font-bold text-electric-blue tracking-wide">
                                         {step.step}
                                     </span>
                                 </div>

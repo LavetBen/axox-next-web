@@ -39,20 +39,19 @@ const expertiseLinks = [
   'Frontend Development',
   'Backend Systems',
   'Mobile Native iOS & Android',
-  'Cloud Computing',
-  'Database Management'
+  'Loan Management System',
+  'ERP Solutions'
 ];
 
 const industriesLinks = [
-  'Fintech',
-  'Energy',
-  'Government',
-  'Healthcare',
-  'Real Estate'
+  { name: 'Fintech', path: '/industries/fintech' },
+  { name: 'Energy', path: '/industries/energy' },
+  { name: 'Food', path: '/industries/food' },
+  { name: 'Healthcare', path: '/industries/healthcare' },
+  { name: 'Real Estate', path: '/industries/real-estate' },
 ];
 
 const companyLinks = [
-  'About us',
   'Services',
   'Our clients',
   'Portfolio',
@@ -107,10 +106,12 @@ export const Footer = () => {
             </Link>
             
             <div className="mb-8">
-              <h4 className="font-bold text-[13px] mb-3 text-charcoal">Axox' office near you:</h4>
-              <p className="text-[13px] text-gray-500 hover:text-charcoal transition-colors leading-loose cursor-pointer underline decoration-gray-300 underline-offset-4">
+              <p className="text-[13px] text-gray-500 mb-2">
                 Harare, Zimbabwe
               </p>
+              <a href="tel:+263780755864" className="text-[13px] text-charcoal font-bold hover:text-electric-blue transition-colors">
+                +263 78 075 5864
+              </a>
             </div>
           </div>
 
@@ -130,34 +131,21 @@ export const Footer = () => {
                   ))}
                 </ul>
               </div>
-              <div>
-                <h4 className="font-bold text-[13px] mb-4">Advisory</h4>
-                <ul className="space-y-3">
-                  {servicesAdvisory.map(link => (
-                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
-                  ))}
-                </ul>
-              </div>
+
             </div>
             
             {/* Data & AI & Optimisation */}
             <div>
               <div className="mb-10">
-                <h4 className="font-bold text-[13px] mb-4">Data & AI</h4>
-                <ul className="space-y-3">
-                  {servicesData.map(link => (
-                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
-                  ))}
-                </ul>
+                <h4 className="font-bold text-[13px] mb-2">Tuck No-Code Builder</h4>
+                <p className="text-[12px] text-gray-500 mb-4 leading-relaxed">
+                  Launch a professional e-commerce store in minutes without writing a single line of code.
+                </p>
+                <div className="flex flex-col space-y-2">
+                  <a href="https://tuck.co.zw/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-charcoal font-semibold hover:text-electric-blue transition-colors flex items-center gap-2">Visit Website <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3" /></a>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-[13px] mb-4">Optimisation</h4>
-                <ul className="space-y-3">
-                  {servicesOptimisation.map(link => (
-                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
-                  ))}
-                </ul>
-              </div>
+
             </div>
           </div>
 
@@ -176,7 +164,7 @@ export const Footer = () => {
             <h3 className="text-[28px] font-light mb-8 text-charcoal">Industries</h3>
             <ul className="space-y-3 mt-14">
               {industriesLinks.map(link => (
-                <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+                <li key={link.name}><Link href={link.path} className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -201,24 +189,19 @@ export const Footer = () => {
                       {servicesEngineering.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
                     </ul>
                  </div>
+
                  <div>
-                    <h4 className="font-bold text-sm mb-4">Advisory</h4>
-                    <ul className="space-y-3">
-                      {servicesAdvisory.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
-                    </ul>
+                    <h4 className="font-bold text-sm mb-2">Tuck No-Code Builder</h4>
+                    <p className="text-[12px] text-gray-500 mb-3 leading-relaxed">
+                      Launch a professional e-commerce store in minutes without writing a single line of code.
+                    </p>
+                    <div className="text-[13px] text-gray-500 space-y-3">
+                      <div className="flex flex-col space-y-2">
+                        <a href="https://tuck.co.zw/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-charcoal font-semibold hover:text-electric-blue transition-colors flex items-center gap-2">Visit Website <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3" /></a>
+                      </div>
+                    </div>
                  </div>
-                 <div>
-                    <h4 className="font-bold text-sm mb-4">Data & AI</h4>
-                    <ul className="space-y-3">
-                      {servicesData.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
-                    </ul>
-                 </div>
-                 <div>
-                    <h4 className="font-bold text-sm mb-4">Optimisation</h4>
-                    <ul className="space-y-3">
-                      {servicesOptimisation.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
-                    </ul>
-                 </div>
+
                </div>
             </MobileFooterSection>
 
@@ -230,7 +213,7 @@ export const Footer = () => {
 
             <MobileFooterSection title="Industries">
                <ul className="space-y-3 pl-4">
-                  {industriesLinks.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+                  {industriesLinks.map(link => <li key={link.name}><Link href={link.path} className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link.name}</Link></li>)}
                </ul>
             </MobileFooterSection>
 

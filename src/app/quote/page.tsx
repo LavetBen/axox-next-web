@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { sanitizeText, sanitizeEmail, sanitizePhone, sanitizeBudget } from '@/lib/sanitize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowRight,
@@ -12,7 +13,13 @@ import {
     faCloud,
     faPlug,
     faCode,
-    faCheck
+    faCheck,
+    faUsers,
+    faFileInvoiceDollar,
+    faCashRegister,
+    faMoneyCheckAlt,
+    faBoxOpen,
+    faChartLine
 } from '@fortawesome/free-solid-svg-icons';
 import { useToast } from '@/hooks/use-toast';
 import { db } from '@/lib/firebase';
@@ -25,6 +32,12 @@ const projectTypes = [
     { id: 'cloud', label: 'Cloud System', icon: faCloud },
     { id: 'api', label: 'API Integration', icon: faPlug },
     { id: 'custom', label: 'Custom Software', icon: faCode },
+    { id: 'hr', label: 'HR System', icon: faUsers },
+    { id: 'accounting', label: 'Accounting System', icon: faFileInvoiceDollar },
+    { id: 'pos', label: 'POS System', icon: faCashRegister },
+    { id: 'loan', label: 'Loan Management', icon: faMoneyCheckAlt },
+    { id: 'inventory', label: 'Inventory Management', icon: faBoxOpen },
+    { id: 'crm', label: 'CRM System', icon: faChartLine },
 ];
 
 const timelines = [
@@ -51,7 +64,17 @@ export default function Quote() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        let sanitized = value;
+        switch (name) {
+            case 'email':     sanitized = sanitizeEmail(value);  break;
+            case 'phone':     sanitized = sanitizePhone(value);  break;
+            case 'name':
+            case 'company':
+            case 'description': sanitized = sanitizeText(value); break;
+            default:          sanitized = sanitizeText(value);   break;
+        }
+        setFormData({ ...formData, [name]: sanitized });
     };
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
@@ -62,16 +85,21 @@ export default function Quote() {
         setIsSubmitting(true);
 
         try {
+            // Final sanitization pass before persisting (defence-in-depth)
+            const safeData = {
+                projectType: sanitizeText(formData.projectType),
+                name:        sanitizeText(formData.name),
+                email:       sanitizeEmail(formData.email),
+                phone:       sanitizePhone(formData.phone),
+                company:     sanitizeText(formData.company),
+                budget:      sanitizeBudget(formData.budget),
+                timeline:    sanitizeText(formData.timeline),
+                description: sanitizeText(formData.description),
+            };
+
             // Save to Firestore
             await addDoc(collection(db, 'quotes'), {
-                projectType: formData.projectType,
-                name: formData.name,
-                email: formData.email,
-                phone: formData.phone,
-                company: formData.company,
-                budget: formData.budget,
-                timeline: formData.timeline,
-                description: formData.description,
+                ...safeData,
                 status: 'new',
                 createdAt: serverTimestamp(),
             });
@@ -142,7 +170,7 @@ export default function Quote() {
 
             {/* Quote Form */}
             <section className="pb-32">
-                <div className="section-container max-w-3xl">
+                <div className="section-container max-w-5xl">
                     {/* Progress Steps */}
                     <div className="mb-16">
                         <div className="flex items-center justify-between mb-4">
@@ -186,7 +214,7 @@ export default function Quote() {
                                 className="space-y-6"
                             >
                                 <h2 className="text-2xl font-light text-white mb-8">What type of project do you need?</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {projectTypes.map((type) => (
                                         <button
                                             key={type.id}
@@ -220,7 +248,7 @@ export default function Quote() {
                                 <h2 className="text-2xl font-light text-white mb-8">Tell us about yourself</h2>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="name" className="block text-sm font-light text-white/70 mb-2">
+                                        <label htmlFor="name" className="block text-sm font-light text-gray-500 mb-2">
                                             Full Name *
                                         </label>
                                         <input
@@ -235,7 +263,7 @@ export default function Quote() {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="email" className="block text-sm font-light text-white/70 mb-2">
+                                        <label htmlFor="email" className="block text-sm font-light text-gray-500 mb-2">
                                             Email Address *
                                         </label>
                                         <input
@@ -250,7 +278,7 @@ export default function Quote() {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="phone" className="block text-sm font-light text-white/70 mb-2">
+                                        <label htmlFor="phone" className="block text-sm font-light text-gray-500 mb-2">
                                             Phone Number
                                         </label>
                                         <input
@@ -264,7 +292,7 @@ export default function Quote() {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="company" className="block text-sm font-light text-white/70 mb-2">
+                                        <label htmlFor="company" className="block text-sm font-light text-gray-500 mb-2">
                                             Company Name
                                         </label>
                                         <input
@@ -319,7 +347,7 @@ export default function Quote() {
                                                         placeholder="Enter amount"
                                                         className="w-full pl-8 pr-4 py-3 rounded-sm border border-white/10 bg-[#22222f] text-white focus:outline-none focus:border-electric-blue font-light placeholder:text-white/20"
                                                         onChange={(e) => {
-                                                            const val = e.target.value;
+                                                            const val = e.target.value.replace(/[^0-9]/g, '');
                                                             setFormData({
                                                                 ...formData,
                                                                 budget: val ? `$80 - $${val}` : ''

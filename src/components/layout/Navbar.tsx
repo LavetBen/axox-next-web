@@ -1,17 +1,31 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Search, ArrowUpRight, Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCreditCard,
+  faBolt,
+  faUtensils,
+  faHospital,
+  faBuilding,
+} from '@fortawesome/free-solid-svg-icons';
+
+const industryLinks = [
+  { name: 'Fintech', path: '/industries/fintech', icon: faCreditCard, color: '#0000ff' },
+  { name: 'Energy', path: '/industries/energy', icon: faBolt, color: '#f59e0b' },
+  { name: 'Food', path: '/industries/food', icon: faUtensils, color: '#22c55e' },
+  { name: 'Healthcare', path: '/industries/healthcare', icon: faHospital, color: '#ef4444' },
+  { name: 'Real Estate', path: '/industries/real-estate', icon: faBuilding, color: '#8b5cf6' },
+];
 
 const navLinks = [
-  { name: 'ABOUT', path: '/about' },
   { name: 'AI DEVELOPMENT', path: '/ai-development' },
   { name: 'SERVICES', path: '/services' },
   { name: 'TECHNOLOGIES', path: '/technologies' },
-  { name: 'INDUSTRIES', path: '/industries' },
   { name: 'PRICING', path: '/pricing' },
   { name: 'PORTFOLIO', path: '/portfolio' },
   { name: 'CONTACT', path: '/contact' },
@@ -22,20 +36,34 @@ const navLinks = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
+  const [isMobileIndustriesOpen, setIsMobileIndustriesOpen] = useState(false);
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => setIsMobileMenuOpen(false), [pathname]);
-  const primaryLinks = navLinks.slice(0, 5);
-  const moreLinks = navLinks.slice(5);
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsIndustriesOpen(false);
+  }, [pathname]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsIndustriesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const primaryLinks = navLinks.slice(0, 4);
 
   return (
     <header
@@ -67,30 +95,76 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              {moreLinks.length > 0 && (
-                <div className="relative">
-                  <button
-                    onClick={() => setIsMoreOpen(!isMoreOpen)}
-                    className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
-                  >
-                    More
-                    <ChevronDown className={`w-4 h-4 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {isMoreOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-20">
-                      {moreLinks.map((link) => (
-                        <Link
-                          key={link.path}
-                          href={link.path}
-                          className="block px-4 py-2 text-sm text-charcoal hover:bg-gray-100"
-                        >
-                          {link.name}
-                        </Link>
-                      ))}
-                    </div>
+
+              {/* Industries Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsIndustriesOpen(!isIndustriesOpen)}
+                  className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
+                >
+                  INDUSTRIES
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${isIndustriesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isIndustriesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                      transition={{ duration: 0.18, ease: 'easeOut' }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[320px] bg-white border border-gray-100 shadow-xl shadow-black/10 rounded-sm overflow-hidden z-50"
+                    >
+                      {/* Dropdown header */}
+                      <div className="px-5 py-3 bg-[#1a1a24] border-b border-white/5">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-semibold">
+                          Industries We Serve
+                        </p>
+                      </div>
+
+                      {/* Industry items */}
+                      <div className="py-2">
+                        {industryLinks.map((item) => (
+                          <Link
+                            key={item.path}
+                            href={item.path}
+                            onClick={() => setIsIndustriesOpen(false)}
+                            className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50 transition-colors group"
+                          >
+                            <div
+                              className="w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-105"
+                              style={{ background: `${item.color}18`, border: `1px solid ${item.color}30` }}
+                            >
+                              <FontAwesomeIcon
+                                icon={item.icon}
+                                className="w-3.5 h-3.5"
+                                style={{ color: item.color }}
+                              />
+                            </div>
+                            <div>
+                              <p className="text-[13px] font-semibold text-charcoal group-hover:text-black transition-colors">
+                                {item.name}
+                              </p>
+                            </div>
+                            <ArrowUpRight
+                              className="w-3.5 h-3.5 ml-auto text-gray-300 group-hover:text-gray-500 transition-colors"
+                            />
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
                   )}
-                </div>
-              )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                href="/quote"
+                className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
+              >
+                GET QUOTE
+              </Link>
             </div>
 
             {/* Right Actions */}
@@ -103,7 +177,7 @@ export const Navbar = () => {
                   Contact us
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
-                <button 
+                <button
                   className="w-[42px] h-[42px] rounded-full bg-[#EEF0F4] flex items-center justify-center text-charcoal hover:bg-[#E2E6EC] transition-colors"
                   aria-label="Search"
                 >
@@ -134,16 +208,58 @@ export const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="xl:hidden fixed inset-0 top-[72px] bg-white z-40 overflow-y-auto"
           >
-            <div className="section-container py-8 flex flex-col gap-6">
-              {navLinks.map((link) => (
+            <div className="section-container py-8 flex flex-col gap-1">
+              {navLinks.slice(0, 4).map((link) => (
                 <Link
                   key={link.path}
                   href={link.path}
-                  className="text-2xl font-medium text-charcoal"
+                  className="text-2xl font-medium text-charcoal py-3 border-b border-gray-50"
                 >
                   {link.name}
                 </Link>
               ))}
+
+              {/* Mobile Industries accordion */}
+              <button
+                onClick={() => setIsMobileIndustriesOpen(!isMobileIndustriesOpen)}
+                className="flex items-center justify-between text-2xl font-medium text-charcoal py-3 border-b border-gray-50 w-full text-left"
+              >
+                INDUSTRIES
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${isMobileIndustriesOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <AnimatePresence>
+                {isMobileIndustriesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    {industryLinks.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className="flex items-center gap-3 py-3 pl-4 border-b border-gray-50"
+                      >
+                        <div
+                          className="w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0"
+                          style={{ background: `${item.color}18` }}
+                        >
+                          <FontAwesomeIcon icon={item.icon} className="w-3 h-3" style={{ color: item.color }} />
+                        </div>
+                        <span className="text-lg font-medium text-charcoal">{item.name}</span>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <Link href="/quote" className="text-2xl font-medium text-charcoal py-3 border-b border-gray-50">
+                GET QUOTE
+              </Link>
+
               <div className="mt-8 flex flex-col gap-4">
                 <Link
                   href="/contact"
