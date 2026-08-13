@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} font-montserrat antialiased`}>
+      <body className={`${montserrat.variable} font-sans antialiased bg-background text-foreground`}>
         <Providers>
           <Layout>{children}</Layout>
           <TawkTo />

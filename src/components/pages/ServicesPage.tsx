@@ -10,16 +10,10 @@ import {
     faCloud,
     faPlug,
     faCode,
-    faArrowRight,
-    faCheck
+    faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
-import Lottie from 'lottie-react';
-import mobileAppAnimation from '@/assets/mobile_app_animation.json';
-import apiAnimation from '@/assets/api_animation.json';
-import webAnimation from '@/assets/web_development_animation.json';
-import cloudAnimation from '@/assets/cloud_solutions_animation.json';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/home/CTASection';
+import ctaBg from '@/assets/cta.jpg';
 
 const services = [
     {
@@ -102,94 +96,108 @@ const services = [
     },
 ];
 
+const processSteps = [
+    {
+        step: "STEP 1",
+        title: "Requirement Definition",
+        description: "We dive deep to understand your vision, goals, and users. This collaborative stage shapes the foundation of your project, ensuring perfect alignment with your needs."
+    },
+    {
+        step: "STEP 2",
+        title: "UX/UI & Technical Design",
+        description: "Our design maestros craft a captivating user experience (UX) and visually stunning interface (UI), while our technical architects lay the groundwork for a powerful and secure solution."
+    },
+    {
+        step: "STEP 3",
+        title: "Development",
+        description: "Axox's skilled developers bring your vision to life, meticulously crafting a high-performance application using the latest technologies and best practices."
+    },
+    {
+        step: "STEP 4",
+        title: "Test and QA",
+        description: "We leave no stone unturned. Rigorous testing by our QA experts ensures your application is bug-free, secure, and delivers a flawless user experience across all devices."
+    },
+    {
+        step: "STEP 5",
+        title: "Deployment",
+        description: "Seamlessly launch your application to the world. We handle everything from server configuration to performance optimization, ensuring a smooth and successful debut."
+    },
+    {
+        step: "STEP 6",
+        title: "Support and Project Management",
+        description: "Your success is our mission. We provide ongoing support, maintenance, and updates, while our dedicated project managers keep you informed throughout the entire journey."
+    }
+];
+
 export function ServicesPage() {
-
     return (
-        <>
+        <div className="bg-white font-cerebri font-light text-charcoal selection:bg-gray-200">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-background">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.5]" />
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-y-1/2" />
-
+            <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-black">
+                {/* Background Image */}
+                <div 
+                    className="absolute inset-0 pointer-events-none bg-cover bg-center"
+                    style={{ backgroundImage: `url(${ctaBg.src})` }}
+                />
+                
+                {/* Black Overlay */}
+                <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+                
                 <div className="section-container relative z-10">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-3xl mx-auto text-center"
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="text-left"
                     >
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                            Services
-                        </div>
-                        <h1 className="heading-xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-                            Our Capabilities
+                        <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-8 text-white">
+                            Architecting <br className="hidden md:block"/>Digital Excellence
                         </h1>
-                        <p className="text-body text-lg">
-                            We offer comprehensive software development services to help your
-                            business thrive in the digital age. From web and mobile apps to
-                            complex enterprise systems.
+                        <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed font-light">
+                            Transform your vision into reality with our elite engineering and design teams. We engineer powerful, scalable, and intelligent software solutions designed to propel your business forward.
                         </p>
                     </motion.div>
                 </div>
             </section>
 
             {/* Services Grid */}
-            <section className="section-padding bg-background">
+            <section className="py-24 bg-[#F8F8F9]">
                 <div className="section-container">
-                    <div className="space-y-16">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
                             <motion.div
                                 key={service.title}
-                                initial={{ opacity: 0, y: 40 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                className="bg-white p-10 border border-gray-200 hover:border-gray-300 transition-all duration-300 group flex flex-col h-full"
                             >
-                                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                                    <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
-                                        <FontAwesomeIcon icon={service.icon} className="w-8 h-8 text-primary-foreground" />
-                                    </div>
-                                    <h2 className="heading-md mb-4">{service.title}</h2>
-                                    <p className="text-body mb-6">{service.description}</p>
-                                    <ul className="space-y-3 mb-8">
-                                        {service.features.map((feature) => (
-                                            <li key={feature} className="flex items-center gap-3">
-                                                <FontAwesomeIcon icon={faCheck} className="w-5 h-5 text-primary" />
-                                                <span>{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <Link
-                                        href="/quote"
-                                        className="btn-primary inline-flex items-center gap-2"
-                                    >
-                                        Request This Service
-                                        <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
-                                    </Link>
+                                <div className="mb-8">
+                                    <FontAwesomeIcon icon={service.icon} className="w-8 h-8 text-charcoal font-light opacity-80" />
                                 </div>
-                                <div className={`bg-secondary rounded-3xl aspect-video flex items-center justify-center overflow-hidden ${index % 2 === 1 ? 'lg:order-1' : ''
-                                    }`}>
-                                    {service.title === 'Mobile Applications' ? (
-                                        <div className="w-full h-full">
-                                            <Lottie animationData={mobileAppAnimation} loop={true} className="w-full h-full" />
-                                        </div>
-                                    ) : service.title === 'API Development' ? (
-                                        <div className="w-full h-full">
-                                            <Lottie animationData={apiAnimation} loop={true} className="w-full h-full" />
-                                        </div>
-                                    ) : service.title === 'Web Development' ? (
-                                        <div className="w-full h-full">
-                                            <Lottie animationData={webAnimation} loop={true} className="w-full h-full" />
-                                        </div>
-                                    ) : service.title === 'Cloud Solutions' ? (
-                                        <div className="w-full h-full">
-                                            <Lottie animationData={cloudAnimation} loop={true} className="w-full h-full" />
-                                        </div>
-                                    ) : (
-                                        <FontAwesomeIcon icon={service.icon} className="w-24 h-24 text-foreground/10" />
-                                    )}
+                                <h2 className="text-2xl font-light mb-4 text-charcoal group-hover:text-black transition-colors">{service.title}</h2>
+                                <p className="text-gray-500 mb-8 leading-relaxed font-light flex-grow">{service.description}</p>
+                                
+                                <ul className="space-y-4 mb-10">
+                                    {service.features.slice(0, 4).map((feature) => (
+                                        <li key={feature} className="flex items-start gap-3">
+                                            <div className="mt-2.5 flex-shrink-0">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+                                            </div>
+                                            <span className="text-[15px] text-gray-500 font-light leading-snug">{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                
+                                <div className="mt-auto pt-6 border-t border-gray-100">
+                                    <Link
+                                        href="/contact"
+                                        className="inline-flex items-center gap-2 text-charcoal hover:text-black font-light text-[15px] group/link uppercase tracking-wide"
+                                    >
+                                        Learn more
+                                        <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                                    </Link>
                                 </div>
                             </motion.div>
                         ))}
@@ -197,7 +205,46 @@ export function ServicesPage() {
                 </div>
             </section>
 
+            {/* Process Section */}
+            <section className="py-24 bg-white">
+                <div className="section-container">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="border border-dotted border-gray-400"
+                    >
+                        {processSteps.map((step, index) => (
+                            <div 
+                                key={step.step}
+                                className={`grid md:grid-cols-[240px_1fr] ${
+                                    index !== processSteps.length - 1 ? 'border-b border-dotted border-gray-400' : ''
+                                }`}
+                            >
+                                {/* Left Column: Step Indicator */}
+                                <div className="p-8 md:p-10 md:border-r border-dotted border-gray-400 flex items-center md:items-start">
+                                    <span className="text-lg md:text-xl font-light text-charcoal tracking-wide">
+                                        {step.step}
+                                    </span>
+                                </div>
+
+                                {/* Right Column: Content */}
+                                <div className="p-8 md:p-10 flex flex-col justify-center">
+                                    <h3 className="text-xl md:text-[22px] font-bold text-charcoal mb-3">
+                                        {step.title}
+                                    </h3>
+                                    <p className="text-[16px] leading-relaxed text-gray-500 font-light">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
             <CTASection />
-        </>
+        </div>
     );
 }

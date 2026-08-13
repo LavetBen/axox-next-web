@@ -1,127 +1,121 @@
 "use client";
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGlobe,
-  faMobileAlt,
-  faDesktop,
-  faCloud,
-  faPlug,
-  faCode,
-  faArrowRight
-} from '@fortawesome/free-solid-svg-icons';
-import { SectionHeading } from '../ui/SectionHeading';
-import { getIcon } from '@/lib/icon-mapping';
-import type { Service } from '@/lib/api/services';
+import Image from 'next/image';
+import { ArrowLeft, ArrowRight, Globe, Smartphone, Database, BarChart } from 'lucide-react';
+import webdevImage from '@/assets/webdev.jpg';
+import erpImage from '@/assets/erp.jpg';
+import softwareImage from '@/assets/software.jpg';
+import realestateImage from '@/assets/realestate.jpg';
 
-interface ServicesSectionProps {
-  services: Service[];
-}
-
-export const ServicesSection = ({ services }: ServicesSectionProps) => {
-  const displayServices = services ? services.map(s => ({
-    ...s,
-    icon: getIcon(s.iconName)
-  })) : [];
-
-  if (!displayServices.length) {
-    return null;
+const industries = [
+  {
+    id: 1,
+    title: 'Web Development',
+    points: [
+      'Crafting high-performance, scalable web apps',
+      'Intuitive interfaces and robust architectures'
+    ],
+    image: webdevImage,
+    icon: Globe,
+  },
+  {
+    id: 2,
+    title: 'Mobile App Development',
+    points: [
+      'Native and cross-platform mobile solutions',
+      'Engaging user experiences for iOS and Android'
+    ],
+    image: softwareImage,
+    icon: Smartphone,
+  },
+  {
+    id: 3,
+    title: 'ERP Solutions',
+    points: [
+      'Streamline business operations and workflows',
+      'Centralize data for enhanced productivity'
+    ],
+    image: erpImage,
+    icon: Database,
+  },
+  {
+    id: 4,
+    title: 'Business Intelligence',
+    points: [
+      'Turn raw data into actionable insights',
+      'Advanced analytics and reporting dashboards'
+    ],
+    image: realestateImage,
+    icon: BarChart,
   }
+];
 
+export const ServicesSection = () => {
   return (
-    <section className="section-padding bg-background">
+    <section className="bg-white py-16 md:py-24 border-t border-gray-100">
       <div className="section-container">
-        {/* Section Heading */}
-        <SectionHeading
-          tag="What We Do"
-          title="Our Services"
-          subtitle="Comprehensive digital solutions tailored to your business needs. From web development to custom software, we cover it all."
-        />
-
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-min gap-4 md:gap-6">
-          {displayServices.map((service, index) => {
-            // Determine grid class based on index for a guaranteed Bento layout
-            let gridClass = "md:col-span-1 md:row-span-1";
-            if (index === 0) gridClass = "md:col-span-2 md:row-span-2 h-full min-h-[300px]"; // Big feature
-
-            return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group relative overflow-hidden rounded-3xl ${gridClass} ${index === 0 || service.featured
-                  ? 'bg-primary p-8 md:p-10'
-                  : 'bg-secondary p-6 md:p-8'
-                  } transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20`}
-              >
-                {/* Background Pattern for Featured */}
-                {(index === 0 || service.featured) && (
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-background rounded-full -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-background rounded-full translate-y-1/2 -translate-x-1/2" />
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="relative z-10 h-full flex flex-col">
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${index === 0 || service.featured
-                    ? 'bg-background/20'
-                    : 'bg-primary'
-                    }`}>
-                    <FontAwesomeIcon
-                      icon={service.icon}
-                      className={`w-6 h-6 ${index === 0 || service.featured ? 'text-primary-foreground' : 'text-primary-foreground'}`}
-                    />
-                  </div>
-
-                  {/* Text Content */}
-                  <div className="flex-1">
-                    <h3 className={`text-xl md:text-2xl font-bold mb-3 ${index === 0 || service.featured ? 'text-primary-foreground' : 'text-foreground'
-                      }`}>
-                      {service.title}
-                    </h3>
-                    <p className={`leading-relaxed ${index === 0 || service.featured
-                      ? 'text-primary-foreground/80 md:text-lg'
-                      : 'text-muted-foreground'
-                      }`}>
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Arrow indicator */}
-                  <div className={`mt-6 flex items-center gap-2 text-sm font-medium transition-all duration-300 group-hover:gap-4 ${index === 0 || service.featured ? 'text-primary-foreground' : 'text-primary'
-                    }`}>
-                    <span>Learn more</span>
-                    <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
-                  </div>
-                </div>
-
-                {/* Hover Border Effect */}
-                <div className={`absolute inset-0 rounded-3xl border-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${index === 0 || service.featured ? 'border-primary-foreground/30' : 'border-primary/30'
-                  }`} />
-              </motion.div>
-            )
-          })}
+        
+        {/* Header Row */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-6">
+          <h2 className="heading-display-2 text-charcoal max-w-2xl font-normal tracking-tight">
+            Game-changing solutions<br/>tailored for every sector
+          </h2>
+          <div className="flex items-center gap-4">
+            <button className="w-12 h-12 rounded-full border border-gray-light flex items-center justify-center text-gray-medium hover:border-charcoal hover:text-charcoal transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button className="w-12 h-12 rounded-full border border-charcoal flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-white transition-colors">
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="text-center mt-12"
-        >
-          <Link href="/services" className="btn-secondary inline-flex items-center gap-2">
-            View All Services
-            <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
-          </Link>
-        </motion.div>
+        {/* Grid Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-l border-gray-100">
+          {industries.map((industry) => (
+            <div 
+              key={industry.id} 
+              className="relative overflow-hidden rounded-sm flex flex-col p-6 lg:p-8 border-r border-b lg:border-b-0 border-gray-100 group transition-colors"
+            >
+              
+              {/* Icon */}
+              <div className="relative z-10 w-14 h-14 rounded-sm bg-gray-100 group-hover:bg-white/20 flex items-center justify-center mb-6 text-charcoal group-hover:text-white transition-colors duration-500">
+                <industry.icon className="w-7 h-7" strokeWidth={1.5} />
+              </div>
+
+              {/* Title */}
+              <h3 className="relative z-10 text-2xl text-charcoal group-hover:text-white font-normal mb-8 transition-colors duration-500">
+                {industry.title}
+              </h3>
+
+              {/* Points */}
+              <div className="relative z-10 flex flex-col gap-6 flex-grow mb-10">
+                {industry.points.map((point, idx) => (
+                  <p key={idx} className="text-[15px] leading-relaxed text-gray-medium group-hover:text-white/90 transition-colors duration-500">
+                    {point}
+                  </p>
+                ))}
+              </div>
+
+              {/* Spacer for absolute image */}
+              <div className="h-[100px] w-full mt-auto relative z-10" />
+
+              {/* Expanding Image */}
+              <div className="absolute bottom-0 left-0 right-0 h-[100px] transition-[height] duration-500 group-hover:h-full z-0">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+                <Image 
+                  src={industry.image} 
+                  alt={industry.title}
+                  fill
+                  className="object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

@@ -4,54 +4,73 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebookF,
-  faTwitter,
-  faLinkedinIn,
-  faInstagram,
-  faGithub
-} from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faPhone, faLocationDot, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-const quickLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
-  { name: 'Contact', path: '/contact' },
-  { name: 'Get a Quote', path: '/quote' },
-];
-
-const services = [
+// Data arrays
+const servicesEngineering = [
   'Web Development',
-  'Mobile Applications',
-  'Desktop Systems',
-  'Cloud Solutions',
-  'API Integrations',
-  'Custom Software',
+  'Mobile App Development',
+  'Custom Software Development',
+  'Cloud Architecture'
 ];
 
-const socialLinks = [
-  { icon: faFacebookF, href: '#', label: 'Facebook' },
-  { icon: faTwitter, href: '#', label: 'Twitter' },
-  { icon: faLinkedinIn, href: '#', label: 'LinkedIn' },
-  { icon: faInstagram, href: '#', label: 'Instagram' },
-  { icon: faGithub, href: '#', label: 'GitHub' },
+const servicesAdvisory = [
+  'Digital Transformation',
+  'IT Strategy',
+  'Technical Feasibility Study',
+  'UX/UI Consulting'
+];
+
+const servicesData = [
+  'Business Intelligence',
+  'Data Analytics',
+  'Data Engineering',
+  'Predictive Modeling'
+];
+
+const servicesOptimisation = [
+  'ERP Solutions',
+  'Workflow Automation',
+  'Software Audit',
+  'Quality Assurance'
+];
+
+const expertiseLinks = [
+  'Frontend Development',
+  'Backend Systems',
+  'Mobile Native iOS & Android',
+  'Cloud Computing',
+  'Database Management'
+];
+
+const industriesLinks = [
+  'Fintech',
+  'Energy',
+  'Government',
+  'Healthcare',
+  'Real Estate'
+];
+
+const companyLinks = [
+  'About us',
+  'Services',
+  'Our clients',
+  'Portfolio',
+  'Contact us'
 ];
 
 const MobileFooterSection = ({ title, children }: { title: string, children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="border-b border-background/10">
+    <div className="border-b border-gray-100">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-4 text-left text-lg font-bold"
+        className="flex items-center justify-between w-full py-5 text-left text-xl font-light text-charcoal"
       >
         {title}
         <FontAwesomeIcon
           icon={faChevronDown}
-          className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform duration-300 text-gray-400 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       <AnimatePresence>
@@ -63,7 +82,7 @@ const MobileFooterSection = ({ title, children }: { title: string, children: Rea
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="pb-4 space-y-3">
+            <div className="pb-6 space-y-3">
               {children}
             </div>
           </motion.div>
@@ -75,163 +94,154 @@ const MobileFooterSection = ({ title, children }: { title: string, children: Rea
 
 export const Footer = () => {
   return (
-    <footer className="bg-foreground text-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-y-1/2" />
-
-      <div className="section-container pt-16 pb-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
+    <footer className="bg-white text-charcoal border-t border-gray-100 font-sans">
+      <div className="section-container pt-16 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-12">
+          
+          {/* Column 1: Brand / Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
-              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-background to-background/70">
-                ax<span className="text-primary">o</span>x
+            <Link href="/" className="inline-block mb-10">
+              <span className="text-3xl font-bold text-charcoal">
+                axox
               </span>
             </Link>
-            <p className="text-background/70 mb-8 leading-relaxed">
-              Building powerful software solutions for businesses worldwide. We transform ideas into digital reality.
-            </p>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-background/5 border border-background/10 flex items-center justify-center transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white group"
-                >
-                  <FontAwesomeIcon icon={social.icon} className="w-4 h-4 text-background/70 group-hover:text-white transition-colors" />
-                </a>
-              ))}
+            
+            <div className="mb-8">
+              <h4 className="font-bold text-[13px] mb-3 text-charcoal">Axox' office near you:</h4>
+              <p className="text-[13px] text-gray-500 hover:text-charcoal transition-colors leading-loose cursor-pointer underline decoration-gray-300 underline-offset-4">
+                Harare, Zimbabwe
+              </p>
             </div>
           </div>
 
-          {/* Desktop Grid (Hidden on Mobile) */}
-          <div className="hidden md:grid md:grid-cols-3 lg:col-span-3 gap-8">
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-lg font-bold mb-6 text-primary">Quick Links</h4>
-              <ul className="space-y-3">
-                {quickLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      href={link.path}
-                      className="text-background/70 transition-colors duration-200 hover:text-primary hover:translate-x-1 inline-block"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Column 2 & 3: Services (Spans 2 columns) */}
+          <div className="hidden lg:grid lg:col-span-2 grid-cols-2 gap-8">
+            <div className="col-span-2">
+              <h3 className="text-[28px] font-light mb-8 text-charcoal">Services</h3>
             </div>
+            
+            {/* Engineering & Advisory */}
+            <div>
+              <div className="mb-10">
+                <h4 className="font-bold text-[13px] mb-4">Engineering</h4>
+                <ul className="space-y-3">
+                  {servicesEngineering.map(link => (
+                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold text-[13px] mb-4">Advisory</h4>
+                <ul className="space-y-3">
+                  {servicesAdvisory.map(link => (
+                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            {/* Data & AI & Optimisation */}
+            <div>
+              <div className="mb-10">
+                <h4 className="font-bold text-[13px] mb-4">Data & AI</h4>
+                <ul className="space-y-3">
+                  {servicesData.map(link => (
+                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold text-[13px] mb-4">Optimisation</h4>
+                <ul className="space-y-3">
+                  {servicesOptimisation.map(link => (
+                    <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
 
-            {/* Services */}
-            <div>
-              <h4 className="text-lg font-bold mb-6 text-primary">Our Services</h4>
-              <ul className="space-y-3">
-                {services.map((service) => (
-                  <li key={service}>
-                    <Link
-                      href="/services"
-                      className="text-background/70 transition-colors duration-200 hover:text-primary hover:translate-x-1 inline-block"
-                    >
-                      {service}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Column 4: Expertise */}
+          <div className="hidden lg:block lg:col-span-1">
+            <h3 className="text-[28px] font-light mb-8 text-charcoal">Expertise</h3>
+            <ul className="space-y-3 mt-14">
+              {expertiseLinks.map(link => (
+                <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Contact Info */}
-            <div>
-              <h4 className="text-lg font-bold mb-6 text-primary">Contact Us</h4>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <FontAwesomeIcon icon={faLocationDot} className="w-5 h-5 text-primary mt-1" />
-                  <span className="text-background/70">
-                    Mount Pleasant, Harare
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FontAwesomeIcon icon={faPhone} className="w-5 h-5 text-primary" />
-                  <a href="tel:+263780755864" className="text-background/70 hover:text-primary transition-colors">
-                    +263 78 075 5864
-                  </a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5 text-primary" />
-                  <a href="mailto:info@axox.com" className="text-background/70 hover:text-primary transition-colors">
-                    info@axox.com
-                  </a>
-                </li>
-              </ul>
-            </div>
+          {/* Column 5: Industries */}
+          <div className="hidden lg:block lg:col-span-1">
+            <h3 className="text-[28px] font-light mb-8 text-charcoal">Industries</h3>
+            <ul className="space-y-3 mt-14">
+              {industriesLinks.map(link => (
+                <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 6: Company */}
+          <div className="hidden lg:block lg:col-span-1">
+            <h3 className="text-[28px] font-light mb-8 text-charcoal">Company</h3>
+            <ul className="space-y-3 mt-14">
+              {companyLinks.map(link => (
+                <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>
+              ))}
+            </ul>
           </div>
 
           {/* Mobile Accordions (Hidden on Desktop) */}
-          <div className="md:hidden lg:hidden col-span-1 space-y-2">
-            <MobileFooterSection title="Quick Links">
-              <ul className="space-y-3 pl-4 border-l-2 border-primary/20">
-                {quickLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link href={link.path} className="text-background/70 hover:text-primary block">
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <div className="lg:hidden col-span-1 space-y-2 mt-8 border-t border-gray-100 pt-4">
+            <MobileFooterSection title="Services">
+               <div className="pl-4 space-y-8">
+                 <div>
+                    <h4 className="font-bold text-sm mb-4">Engineering</h4>
+                    <ul className="space-y-3">
+                      {servicesEngineering.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+                    </ul>
+                 </div>
+                 <div>
+                    <h4 className="font-bold text-sm mb-4">Advisory</h4>
+                    <ul className="space-y-3">
+                      {servicesAdvisory.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+                    </ul>
+                 </div>
+                 <div>
+                    <h4 className="font-bold text-sm mb-4">Data & AI</h4>
+                    <ul className="space-y-3">
+                      {servicesData.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+                    </ul>
+                 </div>
+                 <div>
+                    <h4 className="font-bold text-sm mb-4">Optimisation</h4>
+                    <ul className="space-y-3">
+                      {servicesOptimisation.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+                    </ul>
+                 </div>
+               </div>
             </MobileFooterSection>
 
-            <MobileFooterSection title="Our Services">
-              <ul className="space-y-3 pl-4 border-l-2 border-primary/20">
-                {services.map((service) => (
-                  <li key={service}>
-                    <Link href="/services" className="text-background/70 hover:text-primary block">
-                      {service}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <MobileFooterSection title="Expertise">
+               <ul className="space-y-3 pl-4">
+                  {expertiseLinks.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+               </ul>
             </MobileFooterSection>
 
-            <MobileFooterSection title="Contact Us">
-              <ul className="space-y-4 pl-4 border-l-2 border-primary/20">
-                <li className="flex items-start gap-3">
-                  <FontAwesomeIcon icon={faLocationDot} className="w-5 h-5 text-primary mt-1" />
-                  <span className="text-background/70">Mount Pleasant, Harare</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FontAwesomeIcon icon={faPhone} className="w-5 h-5 text-primary" />
-                  <a href="tel:+263780755864" className="text-background/70 hover:text-primary">
-                    +263 78 075 5864
-                  </a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5 text-primary" />
-                  <a href="mailto:info@axox.com" className="text-background/70 hover:text-primary">
-                    info@axox.com
-                  </a>
-                </li>
-              </ul>
+            <MobileFooterSection title="Industries">
+               <ul className="space-y-3 pl-4">
+                  {industriesLinks.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+               </ul>
             </MobileFooterSection>
+
+            <MobileFooterSection title="Company">
+               <ul className="space-y-3 pl-4">
+                  {companyLinks.map(link => <li key={link}><Link href="#" className="text-[13px] text-gray-500 hover:text-charcoal transition-colors">{link}</Link></li>)}
+               </ul>
+            </MobileFooterSection>
+            
           </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-background/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <p className="text-background/60 text-sm">
-              © {new Date().getFullYear()} Axox. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm">
-              <Link href="/privacy-policy" className="text-background/60 hover:text-primary transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms-of-service" className="text-background/60 hover:text-primary transition-colors">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+          
         </div>
       </div>
     </footer>
