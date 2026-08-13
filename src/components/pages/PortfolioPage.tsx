@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import workBg from '@/assets/software.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faExternalLinkAlt, faGlobe, faMobileAlt, faDesktop, faCloud, faPlug, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -79,27 +80,23 @@ export function PortfolioPage() {
     return (
         <>
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-background">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.5]" />
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-y-1/2" />
-
-                <div className="section-container relative z-10">
+            <section className="relative pt-32 pb-20 overflow-hidden bg-black">
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${workBg.src})` }} />
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="section-container relative z-10 text-center text-white">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-3xl mx-auto text-center"
+                        transition={{ duration: 0.8 }}
                     >
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                            Portfolio
+                        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/10 text-white font-medium text-sm">
+                            Featured Projects
                         </div>
-                        <h1 className="heading-xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-                            Our Showcase
+                        <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
+                            Our Work
                         </h1>
-                        <p className="text-body text-lg">
-                            Explore our latest projects and see how we've helped businesses
-                            transform their operations with innovative software solutions.
+                        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+                            Take a look at some of the innovative solutions we've delivered for our clients.
                         </p>
                     </motion.div>
                 </div>

@@ -7,16 +7,22 @@ import { Search, ArrowUpRight, Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
+  { name: 'ABOUT', path: '/about' },
   { name: 'AI DEVELOPMENT', path: '/ai-development' },
   { name: 'SERVICES', path: '/services' },
   { name: 'TECHNOLOGIES', path: '/technologies' },
   { name: 'INDUSTRIES', path: '/industries' },
+  { name: 'PRICING', path: '/pricing' },
+  { name: 'PORTFOLIO', path: '/portfolio' },
+  { name: 'CONTACT', path: '/contact' },
+  { name: 'QUOTE', path: '/quote' },
   { name: 'COMPANY', path: '/company' },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -27,9 +33,9 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => setIsMobileMenuOpen(false), [pathname]);
+  const primaryLinks = navLinks.slice(0, 5);
+  const moreLinks = navLinks.slice(5);
 
   return (
     <header
@@ -52,16 +58,39 @@ export const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center justify-center gap-8">
-              {navLinks.map((link) => (
+              {primaryLinks.map((link) => (
                 <Link
                   key={link.path}
                   href={link.path}
                   className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors group"
                 >
                   {link.name}
-                  <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-charcoal transition-colors" />
                 </Link>
               ))}
+              {moreLinks.length > 0 && (
+                <div className="relative">
+                  <button
+                    onClick={() => setIsMoreOpen(!isMoreOpen)}
+                    className="flex items-center gap-1.5 text-charcoal hover:text-black text-[13px] font-semibold tracking-wide uppercase transition-colors"
+                  >
+                    More
+                    <ChevronDown className={`w-4 h-4 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isMoreOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-20">
+                      {moreLinks.map((link) => (
+                        <Link
+                          key={link.path}
+                          href={link.path}
+                          className="block px-4 py-2 text-sm text-charcoal hover:bg-gray-100"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Right Actions */}

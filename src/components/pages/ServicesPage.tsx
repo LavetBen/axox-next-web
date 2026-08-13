@@ -136,7 +136,7 @@ export function ServicesPage() {
             <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-black">
                 {/* Background Image */}
                 <div 
-                    className="absolute inset-0 pointer-events-none bg-cover bg-center"
+                    className="absolute inset-0 opacity-30 pointer-events-none bg-cover bg-center"
                     style={{ backgroundImage: `url(${ctaBg.src})` }}
                 />
                 
@@ -161,45 +161,46 @@ export function ServicesPage() {
             </section>
 
             {/* Services Grid */}
-            <section className="py-24 bg-[#F8F8F9]">
+            <section className="py-24 bg-white">
                 <div className="section-container">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <motion.div
+                    {/* Header Bar */}
+                    <div className="bg-gray-100 py-4 px-6 border border-gray-200 border-b-0 font-medium text-charcoal text-[16px] tracking-wide">
+                        A Selection of Our Digital Services and What They Will Deliver for You
+                    </div>
+                    
+                    {/* Dotted Grid */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dotted border-gray-400">
+                        {services.map((service) => (
+                            <div 
                                 key={service.title}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-white p-10 border border-gray-200 hover:border-gray-300 transition-all duration-300 group flex flex-col h-full"
+                                className="p-8 md:p-10 flex flex-col h-full border-b border-r border-dotted border-gray-400 hover:bg-gray-50 transition-colors duration-300"
                             >
-                                <div className="mb-8">
-                                    <FontAwesomeIcon icon={service.icon} className="w-8 h-8 text-charcoal font-light opacity-80" />
-                                </div>
-                                <h2 className="text-2xl font-light mb-4 text-charcoal group-hover:text-black transition-colors">{service.title}</h2>
-                                <p className="text-gray-500 mb-8 leading-relaxed font-light flex-grow">{service.description}</p>
+                                <h3 className="text-[22px] font-light text-charcoal mb-4">
+                                    {service.title}
+                                </h3>
+                                <p className="text-[15px] text-gray-500 font-light leading-relaxed mb-10 flex-grow">
+                                    {service.description}
+                                </p>
                                 
-                                <ul className="space-y-4 mb-10">
-                                    {service.features.slice(0, 4).map((feature) => (
-                                        <li key={feature} className="flex items-start gap-3">
-                                            <div className="mt-2.5 flex-shrink-0">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                                            </div>
-                                            <span className="text-[15px] text-gray-500 font-light leading-snug">{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                                
-                                <div className="mt-auto pt-6 border-t border-gray-100">
+                                <div className="mt-auto">
                                     <Link
                                         href="/contact"
-                                        className="inline-flex items-center gap-2 text-charcoal hover:text-black font-light text-[15px] group/link uppercase tracking-wide"
+                                        className="inline-flex items-center gap-2 text-charcoal font-semibold text-[13px] uppercase tracking-wide group hover:text-black"
                                     >
-                                        Learn more
-                                        <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                                        Contact Us
+                                        <svg 
+                                            className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" 
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            viewBox="0 0 24 24" 
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" className="hidden" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                                        </svg>
                                     </Link>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

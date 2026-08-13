@@ -51,7 +51,7 @@ export const CTASection = () => {
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
                 href="/quote"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black text-[13px] font-semibold tracking-wide uppercase transition-all duration-300 hover:bg-gray-200 group"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-electric-blue text-white text-[13px] font-semibold tracking-wide uppercase transition-all duration-300 hover:opacity-90 group"
               >
                 Get a Free Quote
                 <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />

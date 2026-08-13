@@ -27,14 +27,6 @@ const projectTypes = [
     { id: 'custom', label: 'Custom Software', icon: faCode },
 ];
 
-const budgetRanges = [
-    '$5,000 - $10,000',
-    '$10,000 - $25,000',
-    '$25,000 - $50,000',
-    '$50,000 - $100,000',
-    '$100,000+',
-];
-
 const timelines = [
     '1-2 months',
     '2-3 months',
@@ -54,7 +46,6 @@ export default function Quote() {
         company: '',
         budget: '',
         timeline: '',
-
         description: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,8 +53,6 @@ export default function Quote() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
-
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
@@ -73,7 +62,6 @@ export default function Quote() {
         setIsSubmitting(true);
 
         try {
-
             // Save to Firestore
             await addDoc(collection(db, 'quotes'), {
                 projectType: formData.projectType,
@@ -83,7 +71,6 @@ export default function Quote() {
                 company: formData.company,
                 budget: formData.budget,
                 timeline: formData.timeline,
-
                 description: formData.description,
                 status: 'new',
                 createdAt: serverTimestamp(),
@@ -134,9 +121,9 @@ export default function Quote() {
     };
 
     return (
-        <>
+        <div className="bg-[#1a1a24] min-h-screen font-cerebri selection:bg-electric-blue/30">
             {/* Hero Section */}
-            <section className="pt-32 pb-20 bg-secondary">
+            <section className="pt-32 pb-16">
                 <div className="section-container">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -144,8 +131,8 @@ export default function Quote() {
                         transition={{ duration: 0.6 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <h1 className="heading-xl mb-6">Get a Quote</h1>
-                        <p className="text-body">
+                        <h1 className="text-4xl md:text-5xl font-light text-white tracking-tight mb-6">Get a Quote</h1>
+                        <p className="text-lg text-white/70 font-light">
                             Tell us about your project and we'll provide you with a detailed
                             quote. It only takes a few minutes!
                         </p>
@@ -154,31 +141,33 @@ export default function Quote() {
             </section>
 
             {/* Quote Form */}
-            <section className="section-padding bg-background">
+            <section className="pb-32">
                 <div className="section-container max-w-3xl">
                     {/* Progress Steps */}
-                    <div className="mb-12">
+                    <div className="mb-16">
                         <div className="flex items-center justify-between mb-4">
                             {[1, 2, 3, 4].map((s) => (
                                 <div key={s} className="flex items-center">
                                     <div
-                                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all duration-300 ${step >= s
-                                            ? 'bg-primary text-primary-foreground'
-                                            : 'bg-secondary text-muted-foreground'
+                                        className={`w-10 h-10 rounded-sm flex items-center justify-center font-medium transition-all duration-300 ${
+                                            step >= s
+                                            ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(0,0,255,0.3)]'
+                                            : 'bg-[#22222f] text-white/40 border border-white/5'
                                             }`}
                                     >
                                         {step > s ? <FontAwesomeIcon icon={faCheck} className="w-4 h-4" /> : s}
                                     </div>
                                     {s < 4 && (
                                         <div
-                                            className={`h-1 w-6 sm:w-16 md:w-24 lg:w-32 mx-1 sm:mx-2 transition-all duration-300 ${step > s ? 'bg-primary' : 'bg-secondary'
+                                            className={`h-[2px] w-6 sm:w-16 md:w-24 lg:w-32 mx-1 sm:mx-2 transition-all duration-300 ${
+                                                step > s ? 'bg-electric-blue' : 'bg-white/10'
                                                 }`}
                                         />
                                     )}
                                 </div>
                             ))}
                         </div>
-                        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground px-1">
+                        <div className="flex justify-between text-xs sm:text-sm text-white/50 px-1 font-light tracking-wide">
                             <span>Project Type</span>
                             <span className="hidden sm:inline">Your Info</span>
                             <span className="sm:hidden">Info</span>
@@ -187,7 +176,7 @@ export default function Quote() {
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="bg-[#22222f] p-8 md:p-12 rounded-sm border border-white/5 shadow-2xl">
                         {/* Step 1: Project Type */}
                         {step === 1 && (
                             <motion.div
@@ -196,24 +185,24 @@ export default function Quote() {
                                 exit={{ opacity: 0, x: -20 }}
                                 className="space-y-6"
                             >
-                                <h2 className="heading-md mb-8">What type of project do you need?</h2>
+                                <h2 className="text-2xl font-light text-white mb-8">What type of project do you need?</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                     {projectTypes.map((type) => (
                                         <button
                                             key={type.id}
                                             type="button"
                                             onClick={() => setFormData({ ...formData, projectType: type.id })}
-                                            className={`p-4 sm:p-6 rounded-2xl border-2 transition-all duration-300 ${formData.projectType === type.id
-                                                ? 'border-primary bg-primary/10'
-                                                : 'border-border hover:border-primary/50'
+                                            className={`p-6 rounded-sm border transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
+                                                formData.projectType === type.id
+                                                ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
+                                                : 'border-white/10 bg-[#1a1a24] text-white/70 hover:border-white/30 hover:text-white'
                                                 }`}
                                         >
                                             <FontAwesomeIcon
                                                 icon={type.icon}
-                                                className={`w-8 h-8 mb-3 ${formData.projectType === type.id ? 'text-primary' : 'text-muted-foreground'
-                                                    }`}
+                                                className={`w-8 h-8 ${formData.projectType === type.id ? 'text-electric-blue' : 'text-white/40 group-hover:text-white/80'}`}
                                             />
-                                            <div className="font-medium">{type.label}</div>
+                                            <div className="font-light tracking-wide">{type.label}</div>
                                         </button>
                                     ))}
                                 </div>
@@ -228,10 +217,10 @@ export default function Quote() {
                                 exit={{ opacity: 0, x: -20 }}
                                 className="space-y-6"
                             >
-                                <h2 className="heading-md mb-8">Tell us about yourself</h2>
+                                <h2 className="text-2xl font-light text-white mb-8">Tell us about yourself</h2>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="name" className="block font-medium mb-2">
+                                        <label htmlFor="name" className="block text-sm font-light text-white/70 mb-2">
                                             Full Name *
                                         </label>
                                         <input
@@ -241,12 +230,12 @@ export default function Quote() {
                                             value={formData.name}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="John Doe"
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="email" className="block font-medium mb-2">
+                                        <label htmlFor="email" className="block text-sm font-light text-white/70 mb-2">
                                             Email Address *
                                         </label>
                                         <input
@@ -256,12 +245,12 @@ export default function Quote() {
                                             value={formData.email}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="john@example.com"
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="phone" className="block font-medium mb-2">
+                                        <label htmlFor="phone" className="block text-sm font-light text-white/70 mb-2">
                                             Phone Number
                                         </label>
                                         <input
@@ -270,12 +259,12 @@ export default function Quote() {
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="+1 (555) 123-4567"
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="company" className="block font-medium mb-2">
+                                        <label htmlFor="company" className="block text-sm font-light text-white/70 mb-2">
                                             Company Name
                                         </label>
                                         <input
@@ -284,7 +273,7 @@ export default function Quote() {
                                             name="company"
                                             value={formData.company}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="Acme Inc."
                                         />
                                     </div>
@@ -298,37 +287,37 @@ export default function Quote() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
-                                className="space-y-6"
+                                className="space-y-8"
                             >
-                                <h2 className="heading-md mb-8">Budget & Timeline</h2>
+                                <h2 className="text-2xl font-light text-white mb-8">Budget & Timeline</h2>
                                 <div>
-                                    <label className="block font-medium mb-4">
+                                    <label className="block text-sm font-light text-white/70 mb-4">
                                         What's your estimated budget? *
                                     </label>
-                                    <div className="bg-secondary/50 rounded-xl p-6 border border-border">
+                                    <div className="bg-[#1a1a24] rounded-sm p-6 border border-white/5">
                                         <div className="flex items-center gap-4 mb-4">
                                             <div className="flex-1">
-                                                <label className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1.5 block">
+                                                <label className="text-[11px] text-white/40 font-medium uppercase tracking-widest mb-2 block">
                                                     Minimum
                                                 </label>
-                                                <div className="w-full px-4 py-3 rounded-lg border border-border bg-background/50 text-muted-foreground font-medium cursor-not-allowed flex items-center gap-1">
+                                                <div className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#22222f] text-white/40 font-light cursor-not-allowed flex items-center gap-1">
                                                     <span>$</span>
                                                     <span>80</span>
                                                 </div>
                                             </div>
-                                            <div className="text-muted-foreground pt-6">-</div>
+                                            <div className="text-white/30 pt-6">-</div>
                                             <div className="flex-1">
-                                                <label htmlFor="custom_budget" className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1.5 block">
+                                                <label htmlFor="custom_budget" className="text-[11px] text-white/40 font-medium uppercase tracking-widest mb-2 block">
                                                     Maximum
                                                 </label>
                                                 <div className="relative">
-                                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-light">$</span>
                                                     <input
                                                         type="number"
                                                         id="custom_budget"
                                                         min="80"
                                                         placeholder="Enter amount"
-                                                        className="w-full pl-8 pr-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary font-medium"
+                                                        className="w-full pl-8 pr-4 py-3 rounded-sm border border-white/10 bg-[#22222f] text-white focus:outline-none focus:border-electric-blue font-light placeholder:text-white/20"
                                                         onChange={(e) => {
                                                             const val = e.target.value;
                                                             setFormData({
@@ -336,23 +325,18 @@ export default function Quote() {
                                                                 budget: val ? `$80 - $${val}` : ''
                                                             });
                                                         }}
-                                                        // Extract key part for controlled input if needed, but simple onChange updating formatted string works for submission.
-                                                        // However, to show the value back we'd need to parse step.
-                                                        // Since we don't persist state perfectly between complex edits without parsing, 
-                                                        // let's just use defaultValue or separate state if we step back/forward.
-                                                        // For simplicity in this edit, I'll use the formData to drive value if it exists.
                                                         value={formData.budget.startsWith('$80 - $') ? formData.budget.replace('$80 - $', '') : ''}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-white/40 font-light">
                                             Our services start from $80. Please specify your maximum budget.
                                         </p>
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block font-medium mb-4">
+                                    <label className="block text-sm font-light text-white/70 mb-4">
                                         What's your expected timeline? *
                                     </label>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -361,9 +345,10 @@ export default function Quote() {
                                                 key={time}
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, timeline: time })}
-                                                className={`px-4 py-3 rounded-lg border-2 transition-all duration-300 ${formData.timeline === time
-                                                    ? 'border-primary bg-primary/10'
-                                                    : 'border-border hover:border-primary/50'
+                                                className={`px-4 py-4 rounded-sm border transition-all duration-300 font-light tracking-wide ${
+                                                    formData.timeline === time
+                                                    ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
+                                                    : 'border-white/10 bg-[#1a1a24] text-white/70 hover:border-white/30 hover:text-white'
                                                     }`}
                                             >
                                                 {time}
@@ -382,9 +367,9 @@ export default function Quote() {
                                 exit={{ opacity: 0, x: -20 }}
                                 className="space-y-6"
                             >
-                                <h2 className="heading-md mb-8">Project Details</h2>
+                                <h2 className="text-2xl font-light text-white mb-8">Project Details</h2>
                                 <div>
-                                    <label htmlFor="description" className="block font-medium mb-2">
+                                    <label htmlFor="description" className="block text-sm font-light text-white/70 mb-3">
                                         Describe your project *
                                     </label>
                                     <textarea
@@ -394,7 +379,7 @@ export default function Quote() {
                                         onChange={handleInputChange}
                                         required
                                         rows={6}
-                                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                                        className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20 resize-none"
                                         placeholder="Tell us about your project requirements, goals, and any specific features you need..."
                                     ></textarea>
                                 </div>
@@ -402,14 +387,14 @@ export default function Quote() {
                         )}
 
                         {/* Navigation Buttons */}
-                        <div className="flex justify-between mt-12">
+                        <div className="flex justify-between mt-12 pt-8 border-t border-white/5">
                             {step > 1 ? (
                                 <button
                                     type="button"
                                     onClick={prevStep}
-                                    className="btn-outline flex items-center gap-2"
+                                    className="px-6 py-3 rounded-sm border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors flex items-center gap-2 font-light text-sm tracking-wide uppercase"
                                 >
-                                    <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4" />
+                                    <FontAwesomeIcon icon={faArrowLeft} className="w-3.5 h-3.5" />
                                     Previous
                                 </button>
                             ) : (
@@ -421,25 +406,25 @@ export default function Quote() {
                                     type="button"
                                     onClick={nextStep}
                                     disabled={!isStepValid()}
-                                    className="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-8 py-3 rounded-sm bg-electric-blue text-white hover:opacity-90 transition-opacity flex items-center gap-2 font-semibold text-[13px] tracking-widest uppercase disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
                                     Next
-                                    <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
+                                    <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5" />
                                 </button>
                             ) : (
                                 <button
                                     type="submit"
                                     disabled={!isStepValid() || isSubmitting}
-                                    className="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-8 py-3 rounded-sm bg-electric-blue text-white hover:opacity-90 transition-opacity flex items-center gap-2 font-semibold text-[13px] tracking-widest uppercase disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
-                                    <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
+                                    <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5" />
                                 </button>
                             )}
                         </div>
                     </form>
                 </div>
             </section >
-        </>
+        </div>
     );
 }

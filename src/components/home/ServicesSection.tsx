@@ -62,10 +62,10 @@ export const ServicesSection = () => {
             Game-changing solutions<br/>tailored for every sector
           </h2>
           <div className="flex items-center gap-4">
-            <button className="w-12 h-12 rounded-full border border-gray-light flex items-center justify-center text-gray-medium hover:border-charcoal hover:text-charcoal transition-colors">
+            <button className="w-12 h-12 rounded-full border border-gray-light flex items-center justify-center text-gray-medium hover:border-electric-blue hover:text-electric-blue transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </button>
-            <button className="w-12 h-12 rounded-full border border-charcoal flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-white transition-colors">
+            <button className="w-12 h-12 rounded-full border border-electric-blue flex items-center justify-center text-electric-blue hover:bg-electric-blue hover:text-white transition-colors">
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -80,7 +80,7 @@ export const ServicesSection = () => {
             >
               
               {/* Icon */}
-              <div className="relative z-10 w-14 h-14 rounded-sm bg-gray-100 group-hover:bg-white/20 flex items-center justify-center mb-6 text-charcoal group-hover:text-white transition-colors duration-500">
+              <div className="relative z-10 w-14 h-14 rounded-sm bg-gray-100 group-hover:bg-white/20 flex items-center justify-center mb-6 text-electric-blue group-hover:text-white transition-colors duration-500">
                 <industry.icon className="w-7 h-7" strokeWidth={1.5} />
               </div>
 
