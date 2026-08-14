@@ -1,284 +1,209 @@
 "use client";
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import workBg from '@/assets/software.jpg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faExternalLinkAlt, faGlobe, faMobileAlt, faDesktop, faCloud, faPlug, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { CTASection } from '@/components/home/CTASection';
-import nexaPreview from '@/assets/school.jpg';
-import unifyPreview from '@/assets/realestate.jpg';
-import budgetAppPreview from '@/assets/budget-app-preview.png';
-import Image, { StaticImageData } from 'next/image';
 
 interface Project {
-    id: number;
-    title: string;
-    category: string;
-    description: string;
-    fullDescription: string;
-    tech: string[];
-    features: string[];
-    image?: StaticImageData;
-    link?: string | null;
+  id: number;
+  name: string;
+  description: string;
+  tags: string[];
+  link?: string | null;
 }
 
 const projects: Project[] = [
-    {
-        id: 1,
-        title: 'NEXA',
-        category: 'Web Development',
-        description: 'A comprehensive school management platform.',
-        fullDescription: 'NEXA is a comprehensive school management platform designed for student records, attendance tracking, grading systems, and complete administration. It streamlines educational operations for schools of all sizes.',
-        tech: ['React', 'Node.js', 'PostgreSQL'],
-        features: ['Student records management', 'Attendance tracking', 'Grading system', 'Administration tools'],
-        image: nexaPreview,
-        link: 'https://nexadigital.co.zw',
-    },
-    {
-        id: 2,
-        title: 'Unify',
-        category: 'Web Development',
-        description: 'A unified digital platform for business operations.',
-        fullDescription: 'Unify is a unified digital platform designed to streamline business operations and enhance productivity. It brings together multiple business tools into one cohesive system.',
-        tech: ['React', 'TypeScript', 'Cloud Services'],
-        features: ['Business operations', 'Productivity tools', 'Team collaboration', 'Analytics dashboard'],
-        image: unifyPreview,
-        link: 'https://unify.co.zw',
-    },
-    {
-        id: 3,
-        title: 'Budget App',
-        category: 'Mobile Application',
-        description: 'Personal finance mobile app for expense tracking.',
-        fullDescription: 'A personal finance mobile app to track expenses, set budgets, and manage savings goals. Features AI-powered insights for better financial decisions.',
-        tech: ['React Native', 'Firebase', 'AI Integration'],
-        features: ['Expense tracking', 'Budget management', 'Savings goals', 'AI insights'],
-        image: budgetAppPreview,
-        link: null,
-    },
-];
-
-const categories = [
-    { name: 'All', icon: faLayerGroup },
-    { name: 'Web Development', icon: faGlobe },
-    { name: 'Mobile Application', icon: faMobileAlt },
-    { name: 'Desktop Application', icon: faDesktop },
-    { name: 'API Development', icon: faPlug },
-    { name: 'Cloud Solution', icon: faCloud }
+  {
+    id: 1,
+    name: 'NEXA Digital',
+    description: 'A comprehensive school management platform covering student records, attendance tracking, grading systems, and full administration — built for schools of all sizes.',
+    tags: ['Education'],
+    link: 'https://nexadigital.co.zw',
+  },
+  {
+    id: 2,
+    name: 'Unify',
+    description: 'A unified digital workspace that brings together business tools, team collaboration, and analytics into one cohesive platform to streamline day-to-day operations.',
+    tags: ['Enterprise', 'SaaS'],
+    link: 'https://unify.co.zw',
+  },
+  {
+    id: 3,
+    name: 'Tuck',
+    description: 'A no-code e-commerce shop builder that lets anyone launch a professional online store in minutes — no technical knowledge required.',
+    tags: ['No-Code', 'E-Commerce'],
+    link: 'https://tuck.co.zw',
+  },
+  {
+    id: 4,
+    name: 'Budget App',
+    description: 'A personal finance mobile app to track expenses, set budgets, and manage savings goals with AI-powered insights for smarter financial decisions.',
+    tags: ['Fintech', 'Mobile'],
+    link: null,
+  },
+  {
+    id: 5,
+    name: 'LoanPro System',
+    description: 'An end-to-end digital loan lifecycle management system with borrower portals, automated underwriting workflows, and real-time reporting dashboards.',
+    tags: ['Fintech', 'Enterprise'],
+    link: null,
+  },
+  {
+    id: 6,
+    name: 'PropList Portal',
+    description: 'A modern property listing and tenant management portal featuring advanced search, filtering, and integrated payment processing for landlords and agents.',
+    tags: ['Real Estate', 'Web'],
+    link: null,
+  },
+  {
+    id: 7,
+    name: 'ERP Suite',
+    description: 'A custom ERP system covering inventory, procurement, HR, and finance — purpose-built to replace fragmented legacy tools for a manufacturing client.',
+    tags: ['Enterprise', 'ERP'],
+    link: null,
+  },
+  {
+    id: 8,
+    name: 'RetailApp Mobile',
+    description: 'A cross-platform iOS and Android customer app with a live product catalogue, loyalty rewards programme, and push notification campaigns.',
+    tags: ['Mobile', 'Retail'],
+    link: null,
+  },
+  {
+    id: 9,
+    name: 'SaaS Platform',
+    description: 'A full-stack SaaS platform with multi-tenant architecture, subscription billing, role-based access control, and a rich analytics dashboard.',
+    tags: ['Web', 'SaaS'],
+    link: null,
+  },
 ];
 
 export function PortfolioPage() {
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  return (
+    <>
+      {/* ── Hero ── */}
+      <section className="pt-32 pb-16 bg-white border-b border-gray-100">
+        <div className="section-container">
+          <div className="grid md:grid-cols-2 gap-12 items-end">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+            >
+              <h1 className="text-[38px] md:text-[52px] font-light leading-[1.08] tracking-tight text-charcoal">
+                Our Clients Build Modern<br />
+                Software with <span className="font-semibold">axox</span>
+              </h1>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+            >
+              <p className="text-[15px] text-gray-medium leading-relaxed max-w-md">
+                We have worked with{' '}
+                <strong className="text-charcoal font-semibold">over 50 leading companies</strong>{' '}
+                globally building solutions, staffing software development teams, managing
+                large teams, and most importantly getting results and achieving our
+                clients&apos; objectives.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-    const filteredProjects = selectedCategory === 'All'
-        ? projects
-        : projects.filter(p => p.category === selectedCategory);
+      {/* ── Cards Grid ── */}
+      <section className="py-16 bg-white">
+        <div className="section-container">
+          <AnimatePresence mode="wait">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-dashed border-gray-300"
+            >
+              {projects.map((project, i) => (
+                <ProjectCard key={project.id} project={project} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
 
-    return (
-        <>
-            {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-black">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${workBg.src})` }} />
-                <div className="absolute inset-0 bg-black/60" />
-                <div className="section-container relative z-10 text-center text-white">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/10 text-white font-medium text-sm">
-                            Featured Projects
-                        </div>
-                        <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
-                            Our Work
-                        </h1>
-                        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-                            Take a look at some of the innovative solutions we've delivered for our clients.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+      {/* ── Bottom CTA ── */}
+      <section className="border-t border-gray-100 py-20 bg-off-white">
+        <div className="section-container text-center">
+          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-electric-blue mb-4">
+            Start a project
+          </p>
+          <h2 className="text-[34px] md:text-[48px] font-light text-charcoal leading-tight mb-8">
+            Let&apos;s build something<br />you&apos;re proud of.
+          </h2>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/quote" className="btn-solid-dark gap-2 inline-flex items-center">
+              Get a free quote
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link href="/contact" className="btn-outline">
+              Talk to us
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            {/* Filter & Projects */}
-            <section className="section-padding bg-background">
-                <div className="section-container">
-                    {/* Category Filter */}
-                    <div className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible justify-start md:justify-center gap-3 mb-12 pb-4 md:pb-0 scrollbar-hide">
-                        {categories.map((category) => (
-                            <button
-                                key={category.name}
-                                onClick={() => setSelectedCategory(category.name)}
-                                className={`flex-shrink-0 px-6 py-2 rounded-full font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedCategory === category.name
-                                    ? 'bg-primary text-primary-foreground shadow-lg'
-                                    : 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
-                                    }`}
-                            >
-                                <FontAwesomeIcon icon={category.icon} />
-                                {category.name}
-                            </button>
-                        ))}
-                    </div>
+      <CTASection />
+    </>
+  );
+}
 
-                    {/* Projects Grid */}
-                    <motion.div
-                        layout
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                    >
-                        <AnimatePresence>
-                            {filteredProjects.map((project) => (
-                                <motion.div
-                                    key={project.id}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="group bg-secondary rounded-2xl overflow-hidden card-hover cursor-pointer"
-                                    onClick={() => setSelectedProject(project)}
-                                >
-                                    {/* Project Image */}
-                                    <div className="aspect-video bg-secondary relative overflow-hidden">
-                                        {project.image ? (
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="w-full h-full object-cover"
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                style={{ objectFit: 'cover' }}
-                                            />
-                                        ) : (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-foreground">
-                                                <span className="text-background text-6xl font-bold opacity-10">
-                                                    {project.title.charAt(0)}
-                                                </span>
-                                            </div>
-                                        )}
-                                        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/80 transition-all duration-300 flex items-center justify-center">
-                                            <FontAwesomeIcon
-                                                icon={faExternalLinkAlt}
-                                                className="w-8 h-8 text-background opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                            />
-                                        </div>
-                                    </div>
+/* ────────────────────────────────────────────
+   Card — name · description · tags · visit link
+──────────────────────────────────────────── */
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className="group border-r border-b border-dashed border-gray-300 bg-white hover:bg-[#fafafa] transition-colors duration-300 p-8 flex flex-col"
+    >
+      {/* Name */}
+      <p className="text-[18px] font-bold text-charcoal tracking-tight mb-3 group-hover:text-electric-blue transition-colors duration-300">
+        {project.name}
+      </p>
 
-                                    <div className="p-6">
-                                        <span className="text-sm text-primary font-medium">{project.category}</span>
-                                        <h3 className="heading-sm mt-2 mb-3">{project.title}</h3>
-                                        <p className="text-muted-foreground mb-4">{project.description}</p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tech.slice(0, 3).map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="px-3 py-1 bg-background rounded-full text-sm"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </motion.div>
-                </div>
-            </section>
+      {/* Description */}
+      <p className="text-[13px] text-gray-medium leading-relaxed flex-1 mb-5">
+        {project.description}
+      </p>
 
-            {/* Project Modal */}
-            <AnimatePresence>
-                {selectedProject && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/80"
-                        onClick={() => setSelectedProject(null)}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="bg-background rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Modal Header */}
-                            <div className="aspect-video bg-secondary relative overflow-hidden h-[300px]">
-                                {selectedProject.image ? (
-                                    <Image
-                                        src={selectedProject.image}
-                                        alt={selectedProject.title}
-                                        className="w-full h-full object-cover"
-                                        fill
-                                        sizes="(max-width: 1200px) 100vw, 800px"
-                                        style={{ objectFit: 'cover' }}
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-foreground">
-                                        <span className="text-background text-8xl font-bold opacity-10">
-                                            {selectedProject.title.charAt(0)}
-                                        </span>
-                                    </div>
-                                )}
-                                <button
-                                    onClick={() => setSelectedProject(null)}
-                                    className="absolute top-4 right-4 w-10 h-10 bg-background rounded-full flex items-center justify-center z-10"
-                                >
-                                    <FontAwesomeIcon icon={faXmark} className="w-5 h-5" />
-                                </button>
-                                {selectedProject.link && (
-                                    <a
-                                        href={selectedProject.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="absolute bottom-4 right-4 px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:bg-primary/90 transition-colors z-10"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        Visit Site
-                                    </a>
-                                )}
-                            </div>
+      {/* Footer: tags left · visit link right */}
+      <div className="flex items-center justify-between gap-3 pt-4 border-t border-dashed border-gray-200">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map((t) => (
+            <span
+              key={t}
+              className="text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 bg-gray-100 text-gray-400 rounded"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
 
-                            {/* Modal Content */}
-                            <div className="p-8">
-                                <span className="text-sm text-primary font-medium">{selectedProject.category}</span>
-                                <h2 className="heading-md mt-2 mb-4">{selectedProject.title}</h2>
-                                <p className="text-muted-foreground mb-6">{selectedProject.fullDescription}</p>
-
-                                <div className="mb-6">
-                                    <h4 className="font-bold mb-3">Key Features</h4>
-                                    <ul className="grid grid-cols-2 gap-2">
-                                        {selectedProject.features.map((feature) => (
-                                            <li key={feature} className="flex items-center gap-2 text-sm">
-                                                <span className="w-2 h-2 bg-primary rounded-full" />
-                                                {feature}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 className="font-bold mb-3">Technologies Used</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {selectedProject.tech.map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="px-4 py-2 bg-secondary rounded-full text-sm font-medium"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            <CTASection />
-        </>
-    );
+        {project.link && (
+          <Link
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 inline-flex items-center gap-1 text-[12px] font-semibold text-electric-blue hover:text-charcoal transition-colors duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Visit website
+            <ArrowUpRight className="w-3 h-3" />
+          </Link>
+        )}
+      </div>
+    </motion.div>
+  );
 }

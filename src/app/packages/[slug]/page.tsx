@@ -35,9 +35,9 @@ export default function PackageDocsPage() {
     return (
         <div className="pt-32 pb-20 min-h-screen bg-background">
             <div className="section-container">
-                <Link href="/knowledge-base" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8">
+                <Link href="/packages" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8">
                     <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4" />
-                    Back to Knowledge Base
+                    Back to Packages
                 </Link>
 
                 <motion.div

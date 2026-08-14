@@ -48,7 +48,7 @@ export default function Pricing() {
     const currentCategory = displayPricing.find((c) => c.id === selectedCategory) || displayPricing[0];
 
     return (
-        <section className="pt-32 pb-20 bg-[#1a1a24] min-h-screen font-cerebri selection:bg-electric-blue/30">
+        <section className="pt-32 pb-20 bg-[#101828] min-h-screen font-cerebri selection:bg-electric-blue/30">
             <div className="section-container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

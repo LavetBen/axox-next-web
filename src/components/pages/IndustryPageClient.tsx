@@ -18,24 +18,11 @@ export function IndustryPageClient({ slug }: { slug: string }) {
   return (
     <div className="bg-white font-cerebri font-light text-charcoal selection:bg-gray-200">
       {/* Hero Section */}
-      <section
-        className={`relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br pt-[72px] ${industry.heroGradient}`}
-      >
-        {/* Dot grid background */}
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-
-        {/* Glowing accent orb */}
-        <div
-          className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: industry.accentColor }}
-        />
+      <section className="relative flex items-center overflow-hidden bg-white pt-24 pb-12 border-b border-gray-100">
+        {/* Background Shape */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-[150%] md:w-[75%] h-[85%] bg-[#f4f5f7]" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }} />
+        </div>
 
         <div className="section-container relative z-10">
           {/* Breadcrumb */}
@@ -43,187 +30,174 @@ export function IndustryPageClient({ slug }: { slug: string }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-[12px] uppercase tracking-[0.2em] mb-8"
-            style={{ color: industry.accentColor }}
+            className="inline-flex items-center gap-3 px-5 py-2.5 bg-[#1a202c] rounded-md text-[13px] font-medium text-white mb-12 shadow-md"
           >
-            <Link href="/" className="opacity-60 hover:opacity-100 transition-opacity text-white">
+            <Link href="/" className="hover:text-blue-300 transition-colors">
               Home
             </Link>
-            <span className="opacity-40 text-white">/</span>
-            <span className="opacity-60 text-white">Industries</span>
-            <span className="opacity-40 text-white">/</span>
-            <span>{industry.name}</span>
+            <span className="text-white/40 text-xs font-bold">❯</span>
+            <span className="hover:text-blue-300 transition-colors cursor-pointer">Industries</span>
+            <span className="text-white/40 text-xs font-bold">❯</span>
+            <span className="text-white">{industry.name}</span>
           </motion.div>
 
-          {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
+            className="max-w-4xl"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 max-w-4xl leading-[1.1]">
+            {/* Industry Tag */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-11 h-11 rounded-full border border-gray-300 flex items-center justify-center bg-transparent shadow-sm shrink-0">
+                <FontAwesomeIcon icon={industry.icon} className="w-4 h-4 text-gray-500" />
+              </div>
+              <span className="text-blue-600 font-bold tracking-wide text-[17px]">
+                {industry.name} Software Development Services
+              </span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-charcoal mb-8 leading-[1.05]">
               {industry.tagline}
             </h1>
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed font-light mb-10">
+            
+            <p className="text-lg md:text-xl text-gray-500 max-w-3xl leading-relaxed font-light mb-12">
               {industry.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/quote"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 text-white text-[13px] font-semibold tracking-wide uppercase transition-all duration-300 hover:opacity-90 group rounded-sm"
-                style={{ background: industry.accentColor }}
-              >
-                Get a Free Quote
-                <FontAwesomeIcon
-                  icon={faArrowRight}
-                  className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
-                />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white text-[13px] font-semibold tracking-wide uppercase transition-all duration-300 hover:bg-white/10 rounded-sm"
-              >
-                Talk to an Expert
-              </Link>
-            </div>
+
           </motion.div>
         </div>
       </section>
 
-      {/* Stats Band */}
-      <section className="bg-[#1a1a24] py-10 border-b border-white/5">
-        <div className="section-container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {industry.stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div
-                  className="text-2xl md:text-3xl font-bold mb-1"
-                  style={{ color: industry.accentColor }}
-                >
-                  {stat.value}
-                </div>
-                <div className="text-[12px] uppercase tracking-widest text-white/50">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Solutions Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white border-b border-gray-100">
         <div className="section-container">
-          {/* Header Bar */}
-          <div className="bg-[#1a1a24] text-white py-5 px-8 rounded-t-sm font-medium text-[16px] tracking-wide flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-lg gap-2">
-            <span
-              className="font-bold tracking-wider uppercase text-sm"
-              style={{ color: industry.accentColor }}
-            >
-              Our Solutions
-            </span>
-            <span className="font-light opacity-80 text-sm">
-              Built specifically for the {industry.name} sector
-            </span>
+          
+          {/* Header */}
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16 mb-12 justify-between items-start">
+            <h2 className="text-3xl md:text-[38px] font-light leading-[1.1] text-charcoal max-w-xl tracking-tight">
+              AI Software Development <br className="hidden md:block"/>Services for {industry.name}
+            </h2>
+            <p className="text-[15px] text-gray-500 max-w-[400px] leading-relaxed font-light">
+              We build intelligent models and scalable solutions that address complex challenges and unlock new opportunities in the {industry.name} sector.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 border-l border-gray-100 shadow-xl shadow-gray-200/50 rounded-b-sm overflow-hidden">
-            {industry.solutions.map((solution, i) => (
-              <motion.div
-                key={solution.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
-                className="p-8 md:p-10 flex flex-col border-b border-r border-gray-100 bg-white hover:bg-gray-50/80 transition-all duration-300 group"
-              >
-                {/* Solution Icon */}
-                <div
-                  className="w-12 h-12 rounded-sm flex items-center justify-center mb-6 transition-all duration-300 group-hover:-translate-y-1"
-                  style={{
-                    background: `${industry.accentColor}15`,
-                    border: `1px solid ${industry.accentColor}25`,
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={solution.icon}
-                    className="w-5 h-5 transition-colors duration-300"
-                    style={{ color: industry.accentColor }}
-                  />
-                </div>
-                <h3 className="text-[20px] font-medium text-charcoal mb-3">
-                  {solution.title}
-                </h3>
-                <p className="text-[14px] text-gray-500 font-light leading-relaxed">
-                  {solution.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          {/* Grid Container */}
+          <div className="relative mt-8">
+            {/* Blue Tab */}
+            <div className="inline-block bg-[#0000ff] text-white font-bold tracking-[0.05em] text-[12px] uppercase px-6 py-3 border-b-[3px] border-[#22c55e]">
+              AI DEV SERVICES FOR {industry.name.toUpperCase()}
+            </div>
+            
+            {/* The Box */}
+            <div className="border border-charcoal p-8 md:p-12 relative overflow-hidden -mt-[1px]">
+              {/* Dot Pattern Background */}
+              <div 
+                className="absolute inset-0 opacity-40 pointer-events-none"
+                style={{
+                  backgroundImage: "radial-gradient(circle at 1.5px 1.5px, #d1d5db 1px, transparent 0)",
+                  backgroundSize: "24px 24px"
+                }}
+              />
 
-      {/* Challenges Section */}
-      <section className="py-20 bg-[#f9f9fc]">
-        <div className="section-container">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <p
-                className="text-[12px] uppercase tracking-[0.2em] mb-4 font-semibold"
-                style={{ color: industry.accentColor }}
-              >
-                Challenges We Solve
-              </p>
-              <h2 className="text-3xl md:text-4xl font-light text-charcoal leading-tight mb-6">
-                We understand the complexities of the{" "}
-                <span className="font-semibold">{industry.name}</span> sector.
-              </h2>
-              <p className="text-[15px] text-gray-500 leading-relaxed">
-                Every industry faces unique obstacles. Our team brings deep domain expertise to deliver solutions that don't just work — they fit seamlessly into your operational reality.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-4"
-            >
-              {industry.challenges.map((challenge, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-4 p-5 bg-white rounded-sm border border-gray-100 shadow-sm"
-                >
-                  <div
-                    className="mt-0.5 flex-shrink-0"
-                    style={{ color: industry.accentColor }}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 relative z-10">
+                {industry.solutions.map((solution, i) => (
+                  <motion.div
+                    key={solution.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
+                    className="flex items-start gap-4"
                   >
-                    <FontAwesomeIcon icon={faCheckCircle} className="w-5 h-5" />
-                  </div>
-                  <span className="text-[15px] text-charcoal font-light">
-                    {challenge}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
+                    {/* Yellow Check Icon */}
+                    <div className="w-[30px] h-[30px] shrink-0 bg-[#fbbf24] flex items-center justify-center rounded-[2px] mt-1">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.6667 3.5L5.25001 9.91667L2.33334 7" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-[16px] font-bold text-charcoal mb-2 leading-tight">
+                        {solution.title}
+                      </h3>
+                      <p className="text-[14px] text-gray-500 leading-relaxed font-light">
+                        {solution.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <CTASection />
+      {/* Benefits / Challenges Section */}
+      <section className="py-24 bg-[#f8f9fa] relative overflow-hidden">
+        <div className="section-container">
+          
+          <div className="relative p-6 md:p-12">
+            {/* Corner Markers */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-gray-400"></div>
+            <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-gray-400"></div>
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-gray-400"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-gray-400"></div>
+
+            {/* Header / Line */}
+            <div className="mb-16">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 bg-blue-600"></div>
+                <span className="text-[12px] font-bold tracking-widest text-charcoal uppercase">
+                  Challenges We Solve
+                </span>
+              </div>
+              <div className="w-full h-[1px] bg-gray-300"></div>
+            </div>
+
+            <div className="grid lg:grid-cols-[1fr_1fr] gap-16 lg:gap-24">
+              {/* Left Column */}
+              <div>
+                <h2 className="text-4xl md:text-[42px] font-light leading-[1.15] text-charcoal mb-8">
+                  We understand the complexities of the {industry.name} sector.
+                </h2>
+                <p className="text-[16px] text-gray-500 leading-relaxed font-light mb-10 max-w-md">
+                  Every industry faces unique obstacles. Our team brings deep domain expertise to deliver solutions that don't just work — they fit seamlessly into your operational reality.
+                </p>
+                <Link href="/contact" className="inline-flex items-center gap-2 text-blue-600 font-bold text-[13px] tracking-wide uppercase hover:text-blue-800 transition-colors">
+                  START TODAY
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l10-10M17 17V7H7"/></svg>
+                </Link>
+              </div>
+
+              {/* Right Column */}
+              <div className="lg:border-l border-gray-300 lg:pl-12 flex flex-col gap-6">
+                {industry.challenges.map((challenge, i) => (
+                  <div key={i} className="mb-2">
+                    <h3 className="text-[20px] text-charcoal leading-snug font-light">
+                      {challenge}
+                    </h3>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Banner CTA */}
+            <div className="mt-24 w-full bg-gradient-to-r from-[#2525d6] to-[#a832e0] p-12 md:p-16 text-center shadow-lg">
+              <h2 className="text-3xl md:text-[34px] font-light text-white mb-8">
+                {industry.name} Software Development Services
+              </h2>
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3.5 font-bold text-[13px] tracking-wide uppercase hover:bg-gray-50 transition-colors shadow-sm">
+                SCHEDULE A CALL
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

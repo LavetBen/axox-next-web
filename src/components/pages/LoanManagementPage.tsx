@@ -73,8 +73,8 @@ export function LoanManagementPage() {
         
         <div className="section-container relative z-10">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="text-left"
             >
@@ -101,8 +101,8 @@ export function LoanManagementPage() {
                 {/* Sticky Sidebar */}
                 <div className="lg:sticky lg:top-32 h-fit z-10">
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
                   >

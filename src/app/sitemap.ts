@@ -1,7 +1,37 @@
 import { MetadataRoute } from 'next'
 
+const expertiseSlugs = [
+    'frontend-development',
+    'backend-systems',
+    'mobile-native-ios-android',
+    'loan-management-system',
+    'erp-solutions',
+];
+
+const industrySlugs = [
+    'fintech',
+    'energy',
+    'food',
+    'healthcare',
+    'real-estate',
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://axoxtech.co.zw'
+
+    const expertiseRoutes = expertiseSlugs.map(slug => ({
+        url: `${baseUrl}/expertise/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
+
+    const industryRoutes = industrySlugs.map(slug => ({
+        url: `${baseUrl}/industries/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
 
     return [
         {
@@ -47,12 +77,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.5,
         },
         {
-            url: `${baseUrl}/knowledge-base`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.7,
-        },
-        {
             url: `${baseUrl}/privacy-policy`,
             lastModified: new Date(),
             changeFrequency: 'yearly',
@@ -64,5 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
+        ...expertiseRoutes,
+        ...industryRoutes,
     ]
 }

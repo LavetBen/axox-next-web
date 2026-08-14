@@ -149,7 +149,7 @@ export default function Quote() {
     };
 
     return (
-        <div className="bg-[#1a1a24] min-h-screen font-cerebri selection:bg-electric-blue/30">
+        <div className="bg-[#101828] min-h-screen font-cerebri selection:bg-electric-blue/30">
             {/* Hero Section */}
             <section className="pt-32 pb-16">
                 <div className="section-container">
@@ -223,7 +223,7 @@ export default function Quote() {
                                             className={`p-6 rounded-sm border transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
                                                 formData.projectType === type.id
                                                 ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
-                                                : 'border-white/10 bg-[#1a1a24] text-white/70 hover:border-white/30 hover:text-white'
+                                                : 'border-white/10 bg-[#101828] text-white/70 hover:border-white/30 hover:text-white'
                                                 }`}
                                         >
                                             <FontAwesomeIcon
@@ -258,7 +258,7 @@ export default function Quote() {
                                             value={formData.name}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#101828] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -273,7 +273,7 @@ export default function Quote() {
                                             value={formData.email}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#101828] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="john@example.com"
                                         />
                                     </div>
@@ -287,7 +287,7 @@ export default function Quote() {
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#101828] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="+1 (555) 123-4567"
                                         />
                                     </div>
@@ -301,7 +301,7 @@ export default function Quote() {
                                             name="company"
                                             value={formData.company}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
+                                            className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#101828] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20"
                                             placeholder="Acme Inc."
                                         />
                                     </div>
@@ -322,7 +322,7 @@ export default function Quote() {
                                     <label className="block text-sm font-light text-white/70 mb-4">
                                         What's your estimated budget? *
                                     </label>
-                                    <div className="bg-[#1a1a24] rounded-sm p-6 border border-white/5">
+                                    <div className="bg-[#101828] rounded-sm p-6 border border-white/5">
                                         <div className="flex items-center gap-4 mb-4">
                                             <div className="flex-1">
                                                 <label className="text-[11px] text-white/40 font-medium uppercase tracking-widest mb-2 block">
@@ -376,7 +376,7 @@ export default function Quote() {
                                                 className={`px-4 py-4 rounded-sm border transition-all duration-300 font-light tracking-wide ${
                                                     formData.timeline === time
                                                     ? 'border-electric-blue bg-electric-blue/10 text-electric-blue'
-                                                    : 'border-white/10 bg-[#1a1a24] text-white/70 hover:border-white/30 hover:text-white'
+                                                    : 'border-white/10 bg-[#101828] text-white/70 hover:border-white/30 hover:text-white'
                                                     }`}
                                             >
                                                 {time}
@@ -407,7 +407,7 @@ export default function Quote() {
                                         onChange={handleInputChange}
                                         required
                                         rows={6}
-                                        className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#1a1a24] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20 resize-none"
+                                        className="w-full px-4 py-3 rounded-sm border border-white/10 bg-[#101828] text-white focus:outline-none focus:border-electric-blue transition-colors font-light placeholder:text-white/20 resize-none"
                                         placeholder="Tell us about your project requirements, goals, and any specific features you need..."
                                     ></textarea>
                                 </div>

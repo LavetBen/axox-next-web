@@ -3,60 +3,49 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, ArrowUpRight, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, ArrowUpRight, Menu, X, ChevronDown, Fingerprint, Zap, Utensils, HeartPulse, Building2, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCreditCard,
-  faBolt,
-  faUtensils,
-  faHospital,
-  faBuilding,
-  faArrowUpRightFromSquare,
-} from '@fortawesome/free-solid-svg-icons';
 
 const industryLinks = [
   {
     name: 'Fintech',
     path: '/industries/fintech',
-    icon: faCreditCard,
+    icon: Fingerprint,
     color: '#000000',
     description: 'Digital banking, payments & loan management systems.',
   },
   {
     name: 'Energy',
     path: '/industries/energy',
-    icon: faBolt,
+    icon: Zap,
     color: '#000000',
     description: 'Smart metering, grid monitoring & billing platforms.',
   },
   {
     name: 'Food',
     path: '/industries/food',
-    icon: faUtensils,
+    icon: Utensils,
     color: '#000000',
     description: 'POS, traceability & supply chain management for food.',
   },
   {
     name: 'Healthcare',
     path: '/industries/healthcare',
-    icon: faHospital,
+    icon: HeartPulse,
     color: '#000000',
     description: 'Hospital systems, EMR & telemedicine platforms.',
   },
   {
     name: 'Real Estate',
     path: '/industries/real-estate',
-    icon: faBuilding,
+    icon: Building2,
     color: '#000000',
     description: 'PropTech, listing portals & tenant management tools.',
   },
 ];
 
 const navLinks = [
-  { name: 'AI DEVELOPMENT', path: '/ai-development' },
   { name: 'SERVICES', path: '/services' },
-  { name: 'TECHNOLOGIES', path: '/technologies' },
   { name: 'PRICING', path: '/pricing' },
   { name: 'PORTFOLIO', path: '/portfolio' },
   { name: 'CONTACT', path: '/contact' },
@@ -129,9 +118,9 @@ export const Navbar = () => {
 
                 {/* Industries Mega Menu Trigger */}
                 <div className="relative" ref={dropdownRef}>
-                  <button
+                  <Link
+                    href="/industries"
                     onMouseEnter={() => setIsIndustriesOpen(true)}
-                    onClick={() => setIsIndustriesOpen(!isIndustriesOpen)}
                     className={`flex items-center gap-1.5 text-[13px] font-semibold tracking-wide uppercase transition-colors ${
                       isIndustriesOpen ? 'text-electric-blue' : 'text-charcoal hover:text-black'
                     }`}
@@ -140,7 +129,7 @@ export const Navbar = () => {
                     <ChevronDown
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${isIndustriesOpen ? 'rotate-180' : ''}`}
                     />
-                  </button>
+                  </Link>
                 </div>
 
                 <Link
@@ -190,10 +179,10 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.18, ease: 'easeOut' }}
-              className="hidden xl:block absolute left-0 right-0 bg-white border-b border-gray-100 shadow-xl shadow-black/10 z-40"
+              className="hidden xl:block absolute top-[72px] left-1/2 -translate-x-1/2 w-full max-w-[1000px] bg-white border border-gray-100 shadow-xl shadow-black/10 z-40 rounded-b-xl"
               onMouseLeave={() => setIsIndustriesOpen(false)}
             >
-              <div className="section-container py-8">
+              <div className="p-10">
                 {/* Section label */}
                 <p className="text-[13px] font-semibold tracking-wide uppercase text-gray-400 mb-6">
                   INDUSTRIES
@@ -205,23 +194,19 @@ export const Navbar = () => {
                     <Link
                       key={item.path}
                       href={item.path}
-                      onClick={() => setIsIndustriesOpen(false)}
-                      className="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50/80 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] group border border-transparent hover:border-gray-100"
+                      className="flex items-start gap-3 p-4 hover:bg-gray-100 transition-colors duration-200 group"
                     >
                       {/* Icon */}
-                      <div className="flex-shrink-0 mt-1 transition-transform duration-300 group-hover:-translate-y-0.5">
-                        <FontAwesomeIcon
-                          icon={item.icon}
-                          className="w-[14px] h-[14px] text-black"
-                        />
+                      <div className="flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:-translate-y-0.5">
+                        <item.icon className="w-[22px] h-[22px] text-gray-700 group-hover:text-electric-blue transition-colors" strokeWidth={1.5} />
                       </div>
 
                       {/* Text */}
                       <div className="min-w-0">
-                        <p className="text-[14px] font-bold text-charcoal group-hover:text-electric-blue transition-colors leading-snug mb-1">
+                        <p className="text-[15px] font-medium text-charcoal group-hover:text-electric-blue transition-colors leading-snug mb-1">
                           {item.name}
                         </p>
-                        <p className="text-[12px] text-gray-500 leading-relaxed font-light">
+                        <p className="text-[13px] text-gray-500 leading-relaxed font-normal">
                           {item.description}
                         </p>
                       </div>
@@ -230,14 +215,14 @@ export const Navbar = () => {
                 </div>
 
                 {/* Footer link */}
-                <div className="mt-6 pt-5 border-t border-gray-100">
+                <div className="mt-8 pt-6 border-t border-gray-100">
                   <Link
                     href="/industries"
                     onClick={() => setIsIndustriesOpen(false)}
                     className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.15em] text-electric-blue hover:opacity-75 transition-opacity"
                   >
-                    VIEW ALL INDUSTRIES
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3" />
+                    INDUSTRIES
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -292,11 +277,11 @@ export const Navbar = () => {
                         className="flex items-center gap-3 py-3 pl-4 border-b border-gray-50 group"
                       >
                         <div className="flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:-translate-y-0.5">
-                          <FontAwesomeIcon icon={item.icon} className="w-3 h-3 text-black" />
+                          <item.icon className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
                         </div>
                         <div>
                           <p className="text-base font-semibold text-charcoal">{item.name}</p>
-                          <p className="text-[12px] text-gray-500">{item.description}</p>
+                          <p className="text-[12px] text-gray-500 font-normal">{item.description}</p>
                         </div>
                       </Link>
                     ))}

@@ -116,7 +116,6 @@ export const industries: Industry[] = [
       },
     ],
     challenges: [
-      'Regulatory compliance (RBZ, GDPR, PCI DSS)',
       'Legacy system modernization',
       'Real-time transaction processing at scale',
       'Cross-border payment integration',
