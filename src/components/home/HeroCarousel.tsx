@@ -7,7 +7,7 @@ import Image from "next/image";
 import erpImage from "@/assets/erp.jpg";
 import webdevImage from "@/assets/webdev.jpg";
 import softwareImage from "@/assets/software.jpg";
-import mobileImage from "@/assets/mobile.jpg";
+import mobileImage from "@/assets/mobapp.jpg";
 
 const slides = [
   {

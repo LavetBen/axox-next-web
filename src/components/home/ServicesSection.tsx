@@ -5,8 +5,11 @@ import Image from 'next/image';
 import { ArrowLeft, ArrowRight, Globe, Smartphone, Database, BarChart } from 'lucide-react';
 import webdevImage from '@/assets/webdev.jpg';
 import erpImage from '@/assets/erp.jpg';
+import erpbsImage from '@/assets/erpbs.jpg';
 import softwareImage from '@/assets/software.jpg';
 import realestateImage from '@/assets/realestate.jpg';
+import mobappImage from '@/assets/mobapp.jpg';
+import businessImage from '@/assets/business.jpg';
 
 const industries = [
   {
@@ -26,7 +29,7 @@ const industries = [
       'Native and cross-platform mobile solutions',
       'Engaging user experiences for iOS and Android'
     ],
-    image: softwareImage,
+    image: mobappImage,
     icon: Smartphone,
   },
   {
@@ -36,7 +39,7 @@ const industries = [
       'Streamline business operations and workflows',
       'Centralize data for enhanced productivity'
     ],
-    image: erpImage,
+    image: erpbsImage,
     icon: Database,
   },
   {
@@ -46,7 +49,7 @@ const industries = [
       'Turn raw data into actionable insights',
       'Advanced analytics and reporting dashboards'
     ],
-    image: realestateImage,
+    image: businessImage,
     icon: BarChart,
   }
 ];
