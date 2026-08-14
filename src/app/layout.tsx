@@ -16,20 +16,20 @@ export const metadata: Metadata = {
   },
   description: "Axox is a leading technology company specializing in custom software development, web applications, mobile apps, desktop systems, and API integrations. We build powerful software for the future.",
   keywords: ["software development", "web development", "mobile apps", "custom systems", "API development", "technology consulting"],
-  authors: [{ name: "Axox" }],
+  authors: [{ name: "Axox Technologies" }],
   openGraph: {
-    title: "Axox - Premium Software Development Company",
+    title: "Axox - Build smarter with Axox Technologies. We provide custom software, web and mobile app development, ERP solutions, and digital services for businesses in Zimbabwe.",
     description: "We build powerful software for the future. Custom systems, web & mobile apps, APIs, and more.",
     type: "website",
     url: "https://axox.com",
-    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
+    images: ["https://i.ibb.co/XkJR6fZW/AXOX-TECHNOLOGIES.png"],
   },
   twitter: {
     card: "summary_large_image",
     site: "@axox",
     title: "Axox - Premium Software Development Company",
     description: "We build powerful software for the future.",
-    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
+    images: ["https://i.ibb.co/XkJR6fZW/AXOX-TECHNOLOGIES.png"],
   },
 };
 
