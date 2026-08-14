@@ -350,16 +350,16 @@ export default function Quote() {
                                                             const val = e.target.value.replace(/[^0-9]/g, '');
                                                             setFormData({
                                                                 ...formData,
-                                                                budget: val ? `$80 - $${val}` : ''
+                                                                budget: val ? `$350 - $${val}` : ''
                                                             });
                                                         }}
-                                                        value={formData.budget.startsWith('$80 - $') ? formData.budget.replace('$80 - $', '') : ''}
+                                                        value={formData.budget.startsWith('$350 - $') ? formData.budget.replace('$350- $', '') : ''}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
                                         <p className="text-sm text-white/40 font-light">
-                                            Our services start from $80. Please specify your maximum budget.
+                                            Our services start from $350. Please specify your maximum budget.
                                         </p>
                                     </div>
                                 </div>

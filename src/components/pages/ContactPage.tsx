@@ -50,7 +50,7 @@ const contactInfo = [
 const faqs = [
     {
         question: "How much does a website cost?",
-        answer: "Our website packages range from $80 for a starter site to $450+ for e-commerce solutions. Custom projects are quoted based on specific requirements."
+        answer: "Our website packages range from $350 for a starter site to $450+ for e-commerce solutions. Custom projects are quoted based on specific requirements."
     },
     {
         question: "How long does it take to build a website?",

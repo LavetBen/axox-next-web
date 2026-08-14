@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, ArrowUpRight, Menu, X, ChevronDown, Fingerprint, Zap, Utensils, HeartPulse, Building2, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Menu, X, ChevronDown, Fingerprint, Zap, Utensils, HeartPulse, Building2, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const industryLinks = [
@@ -78,8 +78,8 @@ export const Navbar = () => {
         setIsIndustriesOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
   const primaryLinks = navLinks.slice(0, 4);
@@ -117,7 +117,7 @@ export const Navbar = () => {
                 ))}
 
                 {/* Industries Mega Menu Trigger */}
-                <div className="relative" ref={dropdownRef}>
+                <div className="relative" ref={dropdownRef} onMouseLeave={() => setIsIndustriesOpen(false)}>
                   <Link
                     href="/industries"
                     onMouseEnter={() => setIsIndustriesOpen(true)}
@@ -130,6 +130,63 @@ export const Navbar = () => {
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${isIndustriesOpen ? 'rotate-180' : ''}`}
                     />
                   </Link>
+
+                  {/* ── Mega Menu (inside ref so clicks don't trigger outside handler) ── */}
+                  <AnimatePresence>
+                    {isIndustriesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                        className="hidden xl:block fixed top-[73px] left-1/2 -translate-x-1/2 w-[1000px] bg-white border border-gray-100 shadow-xl shadow-black/10 z-40 rounded-b-xl"
+                      >
+                        <div className="p-10">
+                          {/* Section label */}
+                          <p className="text-[13px] font-semibold tracking-wide uppercase text-gray-400 mb-6">
+                            INDUSTRIES
+                          </p>
+
+                          {/* 3-column industry grid */}
+                          <div className="grid grid-cols-3 gap-x-8 gap-y-1">
+                            {industryLinks.map((item) => (
+                              <Link
+                                key={item.path}
+                                href={item.path}
+                                className="flex items-start gap-3 p-4 hover:bg-gray-100 transition-colors duration-200 group"
+                              >
+                                {/* Icon */}
+                                <div className="flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:-translate-y-0.5">
+                                  <item.icon className="w-[22px] h-[22px] text-gray-700 group-hover:text-electric-blue transition-colors" strokeWidth={1.5} />
+                                </div>
+
+                                {/* Text */}
+                                <div className="min-w-0">
+                                  <p className="text-[15px] font-medium text-charcoal group-hover:text-electric-blue transition-colors leading-snug mb-1">
+                                    {item.name}
+                                  </p>
+                                  <p className="text-[13px] text-gray-500 leading-relaxed font-normal">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+
+                          {/* Footer link */}
+                          <div className="mt-8 pt-6 border-t border-gray-100">
+                            <Link
+                              href="/industries"
+                              className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.15em] text-electric-blue hover:opacity-75 transition-opacity"
+                            >
+                              INDUSTRIES
+                              <ArrowRight className="w-4 h-4" />
+                            </Link>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 <Link
@@ -150,12 +207,6 @@ export const Navbar = () => {
                     Contact us
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
-                  <button
-                    className="w-[42px] h-[42px] rounded-full bg-[#EEF0F4] flex items-center justify-center text-charcoal hover:bg-[#E2E6EC] transition-colors"
-                    aria-label="Search"
-                  >
-                    <Search className="w-4 h-4" />
-                  </button>
                 </div>
               </div>
 
@@ -170,65 +221,6 @@ export const Navbar = () => {
             </div>
           </nav>
         </div>
-
-        {/* ── Mega Menu ── */}
-        <AnimatePresence>
-          {isIndustriesOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18, ease: 'easeOut' }}
-              className="hidden xl:block absolute top-[72px] left-1/2 -translate-x-1/2 w-full max-w-[1000px] bg-white border border-gray-100 shadow-xl shadow-black/10 z-40 rounded-b-xl"
-              onMouseLeave={() => setIsIndustriesOpen(false)}
-            >
-              <div className="p-10">
-                {/* Section label */}
-                <p className="text-[13px] font-semibold tracking-wide uppercase text-gray-400 mb-6">
-                  INDUSTRIES
-                </p>
-
-                {/* 3-column industry grid */}
-                <div className="grid grid-cols-3 gap-x-8 gap-y-1">
-                  {industryLinks.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className="flex items-start gap-3 p-4 hover:bg-gray-100 transition-colors duration-200 group"
-                    >
-                      {/* Icon */}
-                      <div className="flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:-translate-y-0.5">
-                        <item.icon className="w-[22px] h-[22px] text-gray-700 group-hover:text-electric-blue transition-colors" strokeWidth={1.5} />
-                      </div>
-
-                      {/* Text */}
-                      <div className="min-w-0">
-                        <p className="text-[15px] font-medium text-charcoal group-hover:text-electric-blue transition-colors leading-snug mb-1">
-                          {item.name}
-                        </p>
-                        <p className="text-[13px] text-gray-500 leading-relaxed font-normal">
-                          {item.description}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Footer link */}
-                <div className="mt-8 pt-6 border-t border-gray-100">
-                  <Link
-                    href="/industries"
-                    onClick={() => setIsIndustriesOpen(false)}
-                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.15em] text-electric-blue hover:opacity-75 transition-opacity"
-                  >
-                    INDUSTRIES
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
 
       {/* Mobile Menu */}

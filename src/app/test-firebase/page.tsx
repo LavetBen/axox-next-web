@@ -60,7 +60,7 @@ const initialPricing = [
         tiers: [
             {
                 name: 'Starter',
-                price: '$80',
+                price: '$350',
                 description: 'Perfect for small businesses and portfolios.',
                 features: [
                     '5 Pages Responsive Website',
