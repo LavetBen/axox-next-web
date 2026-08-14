@@ -52,10 +52,9 @@ const industriesLinks = [
 ];
 
 const companyLinks = [
-  'Services',
-  'Our clients',
-  'Portfolio',
-  'Contact us'
+  { name: 'Services', path: '/services' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Contact us', path: '/contact' }
 ];
 
 const MobileFooterSection = ({ title, children }: { title: string, children: React.ReactNode }) => {
@@ -174,7 +173,7 @@ export const Footer = () => {
             <h3 className="text-[28px] font-light mb-8 text-white">Company</h3>
             <ul className="space-y-3 mt-14">
               {companyLinks.map(link => (
-                <li key={link}><Link href="#" className="text-[13px] text-white hover:text-white/50 transition-colors">{link}</Link></li>
+                <li key={link.name}><Link href={link.path} className="text-[13px] text-white hover:text-white/50 transition-colors">{link.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -219,7 +218,7 @@ export const Footer = () => {
 
             <MobileFooterSection title="Company">
                <ul className="space-y-3 pl-4">
-                   {companyLinks.map(link => <li key={link}><Link href="#" className="text-[13px] text-white hover:text-white/50 transition-colors">{link}</Link></li>)}
+                   {companyLinks.map(link => <li key={link.name}><Link href={link.path} className="text-[13px] text-white hover:text-white/50 transition-colors">{link.name}</Link></li>)}
                </ul>
             </MobileFooterSection>
             

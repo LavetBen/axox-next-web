@@ -105,7 +105,7 @@ export const Navbar = () => {
               </div>
 
               {/* Desktop Navigation */}
-              <div className="hidden xl:flex items-center justify-center gap-8">
+              <div className="hidden xl:flex items-center justify-center gap-8 h-full">
                 {primaryLinks.map((link) => (
                   <Link
                     key={link.path}
@@ -117,10 +117,14 @@ export const Navbar = () => {
                 ))}
 
                 {/* Industries Mega Menu Trigger */}
-                <div className="relative" ref={dropdownRef} onMouseLeave={() => setIsIndustriesOpen(false)}>
+                <div 
+                  className="relative h-full flex items-center" 
+                  ref={dropdownRef} 
+                  onMouseEnter={() => setIsIndustriesOpen(true)}
+                  onMouseLeave={() => setIsIndustriesOpen(false)}
+                >
                   <Link
                     href="/industries"
-                    onMouseEnter={() => setIsIndustriesOpen(true)}
                     className={`flex items-center gap-1.5 text-[13px] font-semibold tracking-wide uppercase transition-colors ${
                       isIndustriesOpen ? 'text-electric-blue' : 'text-charcoal hover:text-black'
                     }`}
