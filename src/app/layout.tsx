@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     description: "We build powerful software for the future. Custom systems, web & mobile apps, APIs, and more.",
     type: "website",
     url: "https://axox.com",
-    images: ["https://i.ibb.co/XkJR6fZW/AXOX-TECHNOLOGIES.png"],
+    images: ["https://i.ibb.co/n813PQcJ/AXOX-TECHNOLOGIES-1.png"],
   },
   twitter: {
     card: "summary_large_image",
     site: "@axox",
     title: "Axox - Premium Software Development Company",
     description: "We build powerful software for the future.",
-    images: ["https://i.ibb.co/XkJR6fZW/AXOX-TECHNOLOGIES.png"],
+    images: ["https://i.ibb.co/n813PQcJ/AXOX-TECHNOLOGIES-1.png"],
   },
 };
 
