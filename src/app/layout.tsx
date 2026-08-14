@@ -16,17 +16,50 @@ export const metadata: Metadata = {
   },
   description: "Axox is a leading technology company specializing in custom software development, web applications, mobile apps, desktop systems, and API integrations. We build powerful software for the future.",
   keywords: [
+    // Brand & General
+    "axox",
+    "axox technologies",
     "software development company Zimbabwe", 
     "web development Harare", 
-    "custom ERP solutions", 
-    "loan management system software", 
-    "fintech app developers", 
-    "mobile app development Africa", 
-    "API integrations", 
-    "e-commerce website development",
     "technology consulting Zimbabwe",
-    "axox",
-    "axox technologies"
+    "IT company Africa",
+    
+    // Custom Software & Apps
+    "mobile app development Africa", 
+    "fintech app developers", 
+    "custom software development",
+    "API integrations", 
+    "SaaS development company",
+    
+    // Web & E-commerce
+    "e-commerce website development",
+    "Tuck no-code builder",
+    "professional website design Harare",
+    
+    // POS & Retail Systems
+    "POS system for sale",
+    "point of sale software Zimbabwe",
+    "retail management systems",
+    "inventory management software",
+    
+    // ERPs & Business Management
+    "custom ERP solutions", 
+    "enterprise resource planning software",
+    "accounting software integrations",
+    "HR management systems (HRMS)",
+    "customer relationship management (CRM) development",
+    
+    // Finance & Loan Management
+    "loan management system software", 
+    "microfinance software solutions",
+    "credit scoring systems",
+    "payment gateway integration",
+    
+    // Industry Specific
+    "healthcare management software",
+    "real estate property management software",
+    "food traceability software",
+    "smart metering software energy"
   ],
   authors: [{ name: "Axox Technologies" }],
   openGraph: {
