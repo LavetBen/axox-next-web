@@ -15,7 +15,19 @@ export const metadata: Metadata = {
     template: "%s | Axox"
   },
   description: "Axox is a leading technology company specializing in custom software development, web applications, mobile apps, desktop systems, and API integrations. We build powerful software for the future.",
-  keywords: ["software development", "web development", "mobile apps", "custom systems", "API development", "technology consulting"],
+  keywords: [
+    "software development company Zimbabwe", 
+    "web development Harare", 
+    "custom ERP solutions", 
+    "loan management system software", 
+    "fintech app developers", 
+    "mobile app development Africa", 
+    "API integrations", 
+    "e-commerce website development",
+    "technology consulting Zimbabwe",
+    "axox",
+    "axox technologies"
+  ],
   authors: [{ name: "Axox Technologies" }],
   openGraph: {
     title: "Axox - Build smarter with Axox Technologies. We provide custom software, web and mobile app development, ERP solutions, and digital services for businesses in Zimbabwe.",
