@@ -108,7 +108,7 @@ export default function Pricing() {
                                     onClick={() => setSelectedCategory(category.id)}
                                     className={`flex-shrink-0 px-6 py-3 rounded-sm font-medium transition-all duration-300 whitespace-nowrap border ${
                                         selectedCategory === category.id
-                                        ? 'bg-electric-blue text-white border-electric-blue shadow-[0_0_20px_rgba(0,0,255,0.3)]'
+                                        ? 'bg-electric-blue text-white border-electric-blue shadow-[0_0_20px_rgba(37,99,235,0.3)]'
                                         : 'bg-[#22222f] text-white/70 border-white/10 hover:bg-white/5 hover:text-white'
                                         }`}
                                 >
@@ -135,7 +135,7 @@ export default function Pricing() {
                                         key={`${currentCategory.id}-${tier.name}`}
                                         className={`relative rounded-sm p-8 border flex flex-col ${
                                             tier.popular
-                                            ? 'bg-[#262635] border-electric-blue shadow-[0_8px_30px_rgba(0,0,255,0.1)] z-10'
+                                            ? 'bg-[#262635] border-electric-blue shadow-[0_8px_30px_rgba(37,99,235,0.1)] z-10'
                                             : 'bg-[#22222f] border-white/10 hover:border-white/20 transition-colors'
                                             }`}
                                     >

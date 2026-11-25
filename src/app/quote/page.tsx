@@ -179,7 +179,7 @@ export default function Quote() {
                                     <div
                                         className={`w-10 h-10 rounded-sm flex items-center justify-center font-medium transition-all duration-300 ${
                                             step >= s
-                                            ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(0,0,255,0.3)]'
+                                            ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]'
                                             : 'bg-[#22222f] text-white/40 border border-white/5'
                                             }`}
                                     >

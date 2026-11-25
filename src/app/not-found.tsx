@@ -55,7 +55,7 @@ export default function NotFound() {
                 {/* Shadow layer */}
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 text-[120px] sm:text-[180px] font-bold leading-none tracking-tighter text-[#0000ff] opacity-10 blur-[2px] translate-x-1 translate-y-1"
+                  className="absolute inset-0 text-[120px] sm:text-[180px] font-bold leading-none tracking-tighter text-electric-blue opacity-10 blur-[2px] translate-x-1 translate-y-1"
                 >
                   404
                 </span>

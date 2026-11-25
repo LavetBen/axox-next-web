@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { CookieConsent } from '@/components/ui/CookieConsent';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,7 +12,6 @@ export const Layout = ({ children }: LayoutProps) => {
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
-      <CookieConsent />
     </div>
   );
 };

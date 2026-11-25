@@ -87,7 +87,7 @@ export function IndustryPageClient({ slug }: { slug: string }) {
           {/* Grid Container */}
           <div className="relative mt-8">
             {/* Blue Tab */}
-            <div className="inline-block bg-[#0000ff] text-white font-bold tracking-[0.05em] text-[12px] uppercase px-6 py-3 border-b-[3px] border-[#22c55e]">
+            <div className="inline-block bg-electric-blue text-white font-bold tracking-[0.05em] text-[12px] uppercase px-6 py-3 border-b-[3px] border-[#22c55e]">
               AI DEV SERVICES FOR {industry.name.toUpperCase()}
             </div>
             

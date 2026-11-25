@@ -68,7 +68,7 @@ export const industries: Industry[] = [
     tagline: 'Powering the Future of Finance',
     description:
       'We build secure, scalable financial technology solutions that modernize banking, streamline payments, and deliver exceptional digital experiences for financial institutions and startups alike.',
-    accentColor: '#0000ff',
+    accentColor: '#2563EB',
     heroGradient: 'from-[#080814] via-[#0a0a20] to-[#0d0d2b]',
     icon: faCreditCard,
     stats: [
